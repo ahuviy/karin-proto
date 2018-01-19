@@ -1,0 +1,18 @@
+$headerHeight: 80px;
+
+:host {
+    display: block;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: $headerHeight;
+    width: 100%;
+}
+
+.body {
+    margin-top: $headerHeight;
+    background-color: yellow;
+}
