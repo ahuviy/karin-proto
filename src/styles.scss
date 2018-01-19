@@ -9,3 +9,9 @@ a {
     color: black;
     outline: none;
 }
+
+@for $i from 1 to 100 {
+    .col-#{$i} {
+        width: #{$i + '%'};
+    }
+}

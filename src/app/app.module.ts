@@ -5,17 +5,17 @@ import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomePage } from './home/home.page';
-import { MaterialsPage } from './materials/materials.page';
+import { MaterialsPageModule } from './materials/materials-page.module';
 
 @NgModule({
     declarations: [
         AppComponent,
         NavbarComponent,
         HomePage,
-        MaterialsPage,
     ],
     imports: [
         BrowserModule,
+        MaterialsPageModule,
         AppRouting,
     ],
     bootstrap: [AppComponent]

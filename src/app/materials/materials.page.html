@@ -1,1 +1,8 @@
-חומרי גלם
+<h1 class="title">חומרי גלם</h1>
+<div class="table">
+    <kp-table-header class="row title-row"></kp-table-header>
+    <kp-table-row class="row"
+        *ngFor="let material of (materials$ | async)"
+        [material]="material">
+    </kp-table-row>
+</div>
