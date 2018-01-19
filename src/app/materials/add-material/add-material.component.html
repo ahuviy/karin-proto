@@ -1,0 +1,10 @@
+<a class="back-btn" routerLink="..">חזור</a>
+<form [formGroup]="addForm" (ngSubmit)="add()">
+    <label *ngFor="let item of formCfg">
+        <span>{{item.label}}</span>
+        <input [type]="item.inputType" [formControlName]="item.ctrlKey">
+    </label>
+    <button class="submit-btn" type="submit" [disabled]="addForm.invalid">
+        הוסף
+    </button>
+</form>

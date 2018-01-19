@@ -1,6 +1,7 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Material } from 'app/materials/services/materials.mocks';
+import { MaterialsService } from 'app/materials/services/materials.service';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -11,6 +12,22 @@ import { Material } from 'app/materials/services/materials.mocks';
 export class TableRowComponent {
     @Input() material: Material;
 
+    constructor(
+        private materialsService: MaterialsService,
+    ) { }
+
     get price() { return `${this.material.price} ${this.material.priceUnit}`; }
     get priceIncludingVat() { return `${this.material.priceIncludingVat} ${this.material.priceUnit}`; }
+
+    showInfo() {
+        console.log('showing info for:', this.material);
+    }
+
+    edit() {
+        console.log('editing:', this.material);
+    }
+
+    delete() {
+        this.materialsService.delete(this.material.id);
+    }
 }

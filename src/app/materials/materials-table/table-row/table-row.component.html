@@ -1,6 +1,11 @@
-<p class="col-16">{{material.name}}</p>
-<p class="col-16">{{material.distributorName}}</p>
-<p class="col-16">{{material.weight}}</p>
-<p class="col-16">{{material.weightUnit}}</p>
-<p class="col-16">{{price}}</p>
-<p class="col-16">{{priceIncludingVat}}</p>
+<p class="col-15">{{material.name}}</p>
+<p class="col-15">{{material.distributorName}}</p>
+<p class="col-15">{{material.weight}}</p>
+<p class="col-15">{{material.weightUnit}}</p>
+<p class="col-15">{{price}}</p>
+<p class="col-15">{{priceIncludingVat}}</p>
+<p class="col-7 icons">
+    <i class="fa fa-info-circle clickable" (click)="showInfo()"></i>
+    <i class="fa fa-pencil clickable" (click)="edit()"></i>
+    <i class="fa fa-trash clickable" (click)="delete()"></i>
+</p>

@@ -10,8 +10,43 @@ a {
     outline: none;
 }
 
+button {
+    padding: 4px 10px;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+
+    &[disabled] {
+        opacity: 0.7;
+        cursor: default;
+    }
+}
+
+[text-center] {
+    text-align: center;
+}
+
+i.fa.clickable {
+    cursor: pointer;
+
+    &:hover {
+        color: grey;
+    }
+
+    &:active {
+        color: darkgray;
+    }
+
+    &[disabled] {
+        opacity: 0.5;
+        cursor: default;
+    }
+}
+
 @for $i from 1 to 100 {
     .col-#{$i} {
-        width: #{$i + '%'};
+        width: #{$i + "%"};
     }
 }
