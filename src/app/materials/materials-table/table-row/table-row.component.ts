@@ -1,6 +1,6 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
-import { Material } from '../services/materials.mocks';
+import { Material } from 'app/materials/services/materials.mocks';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,

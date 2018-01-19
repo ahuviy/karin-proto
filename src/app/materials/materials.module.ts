@@ -1,25 +1,26 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from 'app/shared/shared.module';
+import { MaterialsRouting } from './materials.routing';
 import { MaterialsPage } from './materials.page';
-import { TableHeaderComponent } from './table-header/table-header.component';
-import { TableRowComponent } from './table-row/table-row.component';
 import { MaterialsService } from './services/materials.service';
+import { MaterialsTableComponent } from './materials-table/materials-table.component';
+import { TableHeaderComponent } from './materials-table/table-header/table-header.component';
+import { TableRowComponent } from './materials-table/table-row/table-row.component';
 
 @NgModule({
     declarations: [
         MaterialsPage,
+        MaterialsTableComponent,
         TableHeaderComponent,
         TableRowComponent,
     ],
     imports: [
         SharedModule,
+        MaterialsRouting,
     ],
     providers: [
         MaterialsService,
     ],
-    exports: [
-        MaterialsPage,
-    ],
 })
-export class MaterialsPageModule { }
+export class MaterialsModule { }
