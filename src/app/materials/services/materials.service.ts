@@ -30,4 +30,10 @@ export class MaterialsService {
         this._materials$.next(this.materials.filter(m => m.id !== id));
         return Promise.resolve();
     }
+
+    update(mat: Material): Promise<Material> {
+        const updated = this.materials.map(m => (m.id === mat.id) ? mat : m);
+        this._materials$.next(updated);
+        return Promise.resolve(mat);
+    }
 }

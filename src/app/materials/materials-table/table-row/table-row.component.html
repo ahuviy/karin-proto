@@ -1,11 +1,45 @@
-<kp-text-input class="col-15" [readonly]="!editMode" [formControl]="form.get('name')"></kp-text-input>
-<kp-text-input class="col-15" [readonly]="!editMode" [formControl]="form.get('distributorName')"></kp-text-input>
-<kp-text-input class="col-15" [readonly]="!editMode" [formControl]="form.get('weight')"></kp-text-input>
-<kp-text-input class="col-15" [readonly]="!editMode" [formControl]="form.get('weightUnit')"></kp-text-input>
-<p class="col-15">{{price}}</p>
+<div class="col-15">
+    <input class="mat-input" *ngIf="editMode; else matNameElse" [formControl]="form.get('name')">
+    <ng-template #matNameElse>
+        <span>{{material.name}}</span>
+    </ng-template>
+</div>
+<div class="col-15">
+    <input class="mat-input" *ngIf="editMode; else matDistributorNameElse" [formControl]="form.get('distributorName')">
+    <ng-template #matDistributorNameElse>
+        <span>{{material.distributorName}}</span>
+    </ng-template>
+</div>
+<div class="col-15">
+    <input class="mat-input" *ngIf="editMode; else matWeightElse" [formControl]="form.get('weight')">
+    <ng-template #matWeightElse>
+        <span>{{material.weight}}</span>
+    </ng-template>
+</div>
+<div class="col-15">
+    <input class="mat-input" *ngIf="editMode; else matWeightUnitElse" [formControl]="form.get('weightUnit')">
+    <ng-template #matWeightUnitElse>
+        <span>{{material.weightUnit}}</span>
+    </ng-template>
+</div>
+<div class="col-15" style="display:flex;">
+    <ng-container *ngIf="editMode; else matPriceElse">
+        <input class="mat-input" [formControl]="form.get('price')" style="width:100%">
+        <span>&nbsp;{{material.priceUnit}}</span>
+    </ng-container>
+    <ng-template #matPriceElse>
+        <span>{{material.price}} {{material.priceUnit}}</span>
+    </ng-template>
+</div>
 <p class="col-15">{{priceIncludingVat$ | async}}</p>
 <p class="col-7 icons">
-    <i class="fa fa-info-circle clickable" (click)="showInfo()"></i>
-    <i class="fa fa-pencil clickable" (click)="edit()"></i>
-    <i class="fa fa-trash clickable" (click)="delete()"></i>
+    <ng-container *ngIf="editMode; else actionsBlock">
+        <i class="fa fa-times clickable" title="בטל" (click)="cancelEdit()"></i>
+        <i class="fa fa-floppy-o clickable" title="שמור" (click)="save()"></i>
+    </ng-container>
+    <ng-template #actionsBlock>
+        <i class="fa fa-info-circle clickable" title="עוד מידע" (click)="showInfo()"></i>
+        <i class="fa fa-pencil clickable" title="ערוך" (click)="edit()"></i>
+        <i class="fa fa-trash clickable" title="מחק" (click)="delete()"></i>
+    </ng-template>
 </p>
