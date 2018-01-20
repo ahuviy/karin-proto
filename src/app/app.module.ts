@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomePage } from './home/home.page';
+import { CoreModule } from 'app/core/core.module';
 
 @NgModule({
     declarations: [
@@ -14,6 +15,7 @@ import { HomePage } from './home/home.page';
     ],
     imports: [
         BrowserModule,
+        CoreModule,
         AppRouting,
     ],
     bootstrap: [AppComponent]

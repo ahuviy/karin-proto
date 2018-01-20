@@ -1,9 +1,9 @@
-<p class="col-15">{{material.name}}</p>
-<p class="col-15">{{material.distributorName}}</p>
-<p class="col-15">{{material.weight}}</p>
-<p class="col-15">{{material.weightUnit}}</p>
+<kp-text-input class="col-15" [readonly]="!editMode" [formControl]="form.get('name')"></kp-text-input>
+<kp-text-input class="col-15" [readonly]="!editMode" [formControl]="form.get('distributorName')"></kp-text-input>
+<kp-text-input class="col-15" [readonly]="!editMode" [formControl]="form.get('weight')"></kp-text-input>
+<kp-text-input class="col-15" [readonly]="!editMode" [formControl]="form.get('weightUnit')"></kp-text-input>
 <p class="col-15">{{price}}</p>
-<p class="col-15">{{priceIncludingVat}}</p>
+<p class="col-15">{{priceIncludingVat$ | async}}</p>
 <p class="col-7 icons">
     <i class="fa fa-info-circle clickable" (click)="showInfo()"></i>
     <i class="fa fa-pencil clickable" (click)="edit()"></i>

@@ -1,6 +1,6 @@
 import { PERCENT_VAT } from '../constants/finance.consts';
 
-export { genUniqId, getPriceIncludingVat };
+export { genUniqId };
 
 function genUniqId(currentIds: string[]): string {
     let id;
@@ -18,9 +18,4 @@ function guid(): string {
     }
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
-}
-
-function getPriceIncludingVat(price: number): number {
-    const exact = price * (1 + (PERCENT_VAT / 100));
-    return Math.round(exact * 100) / 100;
 }

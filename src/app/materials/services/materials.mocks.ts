@@ -6,7 +6,6 @@ export interface Material {
     weight: number;
     weightUnit: string;
     price: number;
-    priceIncludingVat: number;
     priceUnit: string;
 }
 
@@ -19,7 +18,6 @@ export const MOCK_MATERIALS: Material[] = [
         weight: 10,
         weightUnit: 'גרם',
         price: 5,
-        priceIncludingVat: 7,
         priceUnit: 'ש״ח',
     },
 ];

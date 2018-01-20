@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { Material, MOCK_MATERIALS } from './materials.mocks';
-import { genUniqId, getPriceIncludingVat } from 'functions/util.functions';
+import { genUniqId } from 'functions/util.functions';
 
 @Injectable()
 export class MaterialsService {
@@ -20,7 +20,6 @@ export class MaterialsService {
         const newMaterials = this.materials.concat(Object.assign({
             id: genUniqId(this.materials.map(m => m.id)),
             distributorId: genUniqId(this.materials.map(m => m.distributorId)),
-            priceIncludingVat: getPriceIncludingVat(material.price),
             priceUnit: 'ש״ח',
         }, material));
         this._materials$.next(newMaterials);
