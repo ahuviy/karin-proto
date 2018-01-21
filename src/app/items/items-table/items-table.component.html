@@ -1,0 +1,9 @@
+<a class="add-btn" routerLink="add">
+    <span>הוספה</span>
+    <i class="fa fa-plus"></i>
+</a>
+<kp-items-table-header class="row title-row"></kp-items-table-header>
+<kp-items-table-row class="row"
+    *ngFor="let item of (items$ | async); trackBy: trackByItems"
+    [item]="item">
+</kp-items-table-row>
