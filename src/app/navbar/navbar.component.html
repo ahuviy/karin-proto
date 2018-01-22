@@ -1,4 +1,3 @@
-<a class="link" routerLink="home">מתמחר</a>
-<a class="link" routerLink="materials">חומרי גלם</a>
-<a class="link" routerLink="items">פריטים</a>
-<a class="link" routerLink="settings">הגדרות</a>
+<div class="link" *ngFor="let link of links" [class.active]="rla.isActive">
+    <a [routerLink]="link.url" routerLinkActive #rla="routerLinkActive">{{link.text}}</a>
+</div>

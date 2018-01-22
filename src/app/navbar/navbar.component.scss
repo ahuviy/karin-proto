@@ -6,6 +6,19 @@
 }
 
 .link {
-    margin: 0 10px;
-    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100px;
+    
+    a {
+        margin: 0 10px;
+        color: white;
+    }
+
+    &.active {
+        background-color: darkred;
+        font-weight: 800;
+    }
 }

@@ -1,1 +1,31 @@
-it works
+<div class="col-15">
+    <span *ngIf="!editMode">{{item.name}}</span>
+    <input class="item-input" *ngIf="editMode" [formControl]="form.get('name')">
+</div>
+<div class="col-15">
+    <span *ngIf="!editMode">{{item.weight}}</span>
+    <input class="item-input" *ngIf="editMode" [formControl]="form.get('weight')">
+</div>
+<div class="col-15">
+    <span *ngIf="!editMode">{{item.weightUnit}}</span>
+    <input class="item-input" *ngIf="editMode" [formControl]="form.get('weightUnit')">
+</div>
+<div class="col-15">
+    <span *ngIf="!editMode">{{item.price}}</span>
+    <input class="item-input" *ngIf="editMode" [formControl]="form.get('price')">
+</div>
+<div class="col-15">
+    <span *ngIf="!editMode">{{item.category}}</span>
+    <input class="item-input" *ngIf="editMode" [formControl]="form.get('category')">
+</div>
+<p class="col-7 icons">
+    <ng-container *ngIf="editMode; else actionsBlock">
+        <i class="fa fa-times clickable" title="בטל" (click)="cancelEdit()"></i>
+        <i class="fa fa-floppy-o clickable" title="שמור" (click)="save()"></i>
+    </ng-container>
+    <ng-template #actionsBlock>
+        <i class="fa fa-info-circle clickable" title="עוד מידע" (click)="showInfo()"></i>
+        <i class="fa fa-pencil clickable" title="ערוך" (click)="edit()"></i>
+        <i class="fa fa-trash clickable" title="מחק" (click)="delete()"></i>
+    </ng-template>
+</p>
