@@ -1,3 +1,5 @@
+import { genUniqId } from 'functions/util.functions';
+
 export interface Material {
     id: string;
     name: string;
@@ -9,15 +11,23 @@ export interface Material {
     priceUnit: string;
 }
 
-export const MOCK_MATERIALS: Material[] = [
-    {
-        id: '0',
-        name: 'גבינה',
-        distributorId: 'asdf',
-        distributorName: 'אפי',
-        weight: 10,
-        weightUnit: 'גרם',
-        price: 5,
-        priceUnit: 'ש״ח',
-    },
-];
+const names = ['גבינה', 'ביצים', 'נקניק', 'קמח', 'שמרים', 'שוקולד', 'תותים', 'מנגו', 'מלח'];
+export const MOCK_MATERIALS: Material[] = generateMockMaterials();
+
+
+function generateMockMaterials(): Material[] {
+    let mock: Material[] = [];
+    names.forEach(n => {
+        mock.push({
+            id: genUniqId(mock.map(m => m.id)),
+            name: n,
+            distributorId: genUniqId([]),
+            distributorName: 'אפי',
+            weight: Math.floor(Math.random() * 100),
+            weightUnit: 'גרם',
+            price: Math.floor(Math.random() * 100),
+            priceUnit: 'ש״ח'
+        });
+    });
+    return mock;
+}

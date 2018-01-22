@@ -2,6 +2,13 @@
     display: block;
 }
 
+.top-btns {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+    margin-bottom: 20px;
+}
+
 .back-btn {
     display: block;
     border: 1px solid black;
@@ -11,7 +18,6 @@
     line-height: 25px;
     width: 65px;
     text-align: center;
-    margin-bottom: 20px;
 }
 
 label {
@@ -19,6 +25,10 @@ label {
 }
 
 .submit-btn {
-    margin-top: 20px;
     background-color: greenyellow;
+}
+
+.tbl-header {
+    margin-top: 20px;
+    display: flex;
 }

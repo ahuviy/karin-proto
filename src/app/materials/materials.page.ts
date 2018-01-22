@@ -10,5 +10,5 @@ import { MaterialsService } from 'app/materials/services/materials.service';
     ],
 })
 export class MaterialsPage {
-    
+    // TODO: add searchbar
 }
