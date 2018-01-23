@@ -4,6 +4,6 @@
 <nav class="side-nav" [class.show]="showSideNav">
     ניווט צד
 </nav>
-<div class="body">
+<div class="body" [class.side-nav-hidden]="!showSideNav">
     <router-outlet></router-outlet>
 </div>
