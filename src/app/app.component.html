@@ -1,6 +1,9 @@
-<div class="header">
-    <kp-navbar></kp-navbar>
-</div>
+<nav class="top-bar">
+    <kp-top-bar (menuBtnClick)="toggleSideNav()"></kp-top-bar>
+</nav>
+<nav class="side-nav" [class.show]="showSideNav">
+    ניווט צד
+</nav>
 <div class="body">
     <router-outlet></router-outlet>
 </div>

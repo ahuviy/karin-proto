@@ -3,14 +3,16 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
-import { NavbarComponent } from './navbar/navbar.component';
+import { TopBarComponent } from './top-bar/top-bar.component';
 import { HomePage } from './home/home.page';
+import { UnrecognizedPage } from './unrecognized/unrecogrnized.page';
 import { CoreModule } from 'app/core/core.module';
 
 @NgModule({
     declarations: [
         AppComponent,
-        NavbarComponent,
+        TopBarComponent,
+        UnrecognizedPage,
         HomePage,
     ],
     imports: [
