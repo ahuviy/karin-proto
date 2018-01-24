@@ -1,13 +1,6 @@
 <div class="title-section">
-    <button class="menu-btn" type="button" (click)="menuBtnClick.emit($event)">
+    <button class="menu-btn" type="button" (click)="toggleSideNav()">
         <i class="fa fa-bars" aria-hidden="true"></i>
     </button>
     <span id="home-link" routerLink="">המתמחר</span>
-</div>
-<div class="link" *ngFor="let link of links" [class.active]="rla.isActive">
-    <a [routerLink]="link.url"
-        routerLinkActive #rla="routerLinkActive"
-        [routerLinkActiveOptions]="link.options">
-        {{link.text}}
-    </a>
 </div>

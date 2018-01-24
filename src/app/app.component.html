@@ -1,9 +1,9 @@
 <nav class="top-bar">
-    <kp-top-bar (menuBtnClick)="toggleSideNav()"></kp-top-bar>
+    <kp-top-bar></kp-top-bar>
 </nav>
-<nav class="side-nav" [class.show]="showSideNav">
-    ניווט צד
+<nav class="side-bar" disappearing-scroll [class.show]="showSideNav$ | async">
+    <kp-side-bar></kp-side-bar>
 </nav>
-<div class="body" [class.side-nav-hidden]="!showSideNav">
+<div class="body" [class.side-nav-shown]="showSideNav$ | async">
     <router-outlet></router-outlet>
 </div>

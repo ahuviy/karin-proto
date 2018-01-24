@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 
+import { SideNavService } from 'app/core/side-nav.service';
+
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    showSideNav = true;
+    showSideNav$ = this.sideNavService.isOpen$;
 
-    toggleSideNav() {
-        this.showSideNav = !this.showSideNav;
-    }
+    constructor(private sideNavService: SideNavService) { }
 }

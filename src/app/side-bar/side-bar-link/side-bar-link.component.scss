@@ -1,0 +1,28 @@
+:host {
+    display: block;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.03);
+        border-radius: 2px;
+    }
+
+    &[active=true] {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+
+a {
+    display: flex;
+    align-items: center;
+    padding-right: 16px;
+    padding-left: 12px;
+}
+
+span {
+    display: inline-block;
+    padding-right: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex-grow: 1;
+}

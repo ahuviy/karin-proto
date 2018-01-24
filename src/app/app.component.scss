@@ -1,5 +1,4 @@
-$headerHeight: 56px;
-$rightMenuWidth: 232px;
+@import 'vars';
 
 :host {
     display: block;
@@ -16,16 +15,14 @@ $rightMenuWidth: 232px;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
 }
 
-.side-nav {
-    background: #f2f2f2;
+.side-bar {
+    background: #ededed;
+    top: 56px;
     bottom: 0;
     right: 0;
-    overflow: visible;
-    position: fixed;
     width: $rightMenuWidth;
-    top: 56px;
+    position: fixed;
     z-index: 1;
-    border: 1px dashed green;
     transform: translateX(#{$rightMenuWidth + 2px});
     transition: transform 0.3s ease-in-out;
 
@@ -35,12 +32,32 @@ $rightMenuWidth: 232px;
 }
 
 .body {
-    margin-right: $rightMenuWidth;
     height: 100%;
-    padding-top: $headerHeight;
     box-sizing: border-box;
+    padding-top: $headerHeight;
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 
-    &.side-nav-hidden {
-        margin-right: 0;
+    @media (max-width: 1800px) {
+        width: 66.66%;
+    }
+
+    @media (max-width: 1260px) {
+        width: 840px;
+    }
+
+    @media (max-width: 920px) {
+        width: auto;
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+
+    &.side-nav-shown {
+        @media (max-width: 1632px) {
+            width: auto;
+            margin-right: $rightMenuWidth + 40px;
+            margin-left: 40px;
+        }
     }
 }

@@ -1,16 +1,16 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
+
+import { SideNavService } from 'app/core/side-nav.service';
 
 @Component({
     selector: 'kp-top-bar',
     styleUrls: ['./top-bar.component.scss'],
-    templateUrl: './top-bar.component.html'
+    templateUrl: './top-bar.component.html',
 })
 export class TopBarComponent {
-    @Output() menuBtnClick = new EventEmitter();
+    constructor(private sideNavService: SideNavService) { }
 
-    links = [
-        { url: 'materials', options: {}, text: 'חומרי גלם' },
-        { url: 'items', options: {}, text: 'פריטים' },
-        { url: 'settings', options: {}, text: 'הגדרות' },
-    ];
+    toggleSideNav() {
+        this.sideNavService.toggle();
+    }
 }

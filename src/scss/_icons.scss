@@ -1,0 +1,16 @@
+i.fa.clickable {
+    cursor: pointer;
+
+    &:hover {
+        color: grey;
+    }
+
+    &:active {
+        color: darkgray;
+    }
+
+    &[disabled] {
+        opacity: 0.5;
+        cursor: default;
+    }
+}
