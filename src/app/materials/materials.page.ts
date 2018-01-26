@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { MaterialsService } from 'app/materials/services/materials.service';
+import { MaterialsService } from 'app/core/materials.service';
 
 @Component({
     selector: 'kp-materials-page',

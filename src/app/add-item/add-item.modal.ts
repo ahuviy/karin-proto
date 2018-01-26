@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { MaterialsService } from 'app/materials/services/materials.service';
+import { MaterialsService } from 'app/core/materials.service';
 
 @Component({
-    selector: 'kp-add-material',
-    styleUrls: ['./add-material.component.scss'],
-    templateUrl: './add-material.component.html',
+    selector: 'kp-add-item',
+    styleUrls: ['./add-item.modal.scss'],
+    templateUrl: './add-item.modal.html',
 })
-export class AddMaterialComponent {
+export class AddItemModal {
     constructor(
         private fb: FormBuilder,
         private materialsService: MaterialsService,

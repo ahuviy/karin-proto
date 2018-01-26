@@ -11,10 +11,8 @@
     <input class="searchbar" placeholder="חיפוש">
 </div>
 <div class="settings-wrapper flex-center-center">
-    <i class="fa fa-lg fa-cog clickable" (click)="showSettingsModal = true"></i>
-    <div class="modal-backdrop flex-center-center" *ngIf="showSettingsModal" (click)="showSettingsModal=false">
-        <div class="settings-modal" (click)="$event.stopPropagation()">
-            <kp-settings-page (saved)="showSettingsModal=false"></kp-settings-page>
-        </div>
-    </div>
+    <i class="fa fa-lg fa-cog clickable" (click)="settingsModal.open()"></i>
 </div>
+<kp-modal #settingsModal>
+    <kp-settings-modal (saved)="settingsModal.close()"></kp-settings-modal>
+</kp-modal>

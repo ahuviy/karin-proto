@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { DecimalPipe } from '@angular/common';
 import { map, combineLatest } from 'rxjs/operators';
 
-import { Material } from 'app/materials/services/materials.mocks';
-import { MaterialsService } from 'app/materials/services/materials.service';
+import { Material } from 'app/core/materials.mocks';
+import { MaterialsService } from 'app/core/materials.service';
 import { SettingsService } from 'app/core/settings.service';
 import { Settings } from 'app/core/settings.mocks';
 

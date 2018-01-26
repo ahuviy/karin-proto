@@ -1,0 +1,23 @@
+kp-modal {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: 50;
+    background-color: rgba(10, 10, 10, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal {
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 0 14px rgba(0, 0, 0, 0.24), 0 14px 28px rgba(0, 0, 0, 0.48);
+    height: 75%;
+    min-height: 260px;
+    outline: none;
+    overflow: hidden;
+    width: 600px;
+}

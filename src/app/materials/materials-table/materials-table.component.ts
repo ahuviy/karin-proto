@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { filter } from 'rxjs/operators';
 
-import { MaterialsService } from 'app/materials/services/materials.service';
-import { Material } from 'app/materials/services/materials.mocks';
+import { MaterialsService } from 'app/core/materials.service';
+import { Material } from 'app/core/materials.mocks';
 
 @Component({
     selector: 'kp-materials-table',

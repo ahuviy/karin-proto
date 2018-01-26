@@ -10,7 +10,8 @@ import { HomePage } from './home/home.page';
 import { UnrecognizedPage } from './unrecognized/unrecogrnized.page';
 import { CoreModule } from 'app/core/core.module';
 import { SharedModule } from 'app/shared/shared.module';
-import { SettingsPage } from 'app/settings/settings.page';
+import { SettingsModal } from 'app/settings/settings.modal';
+import { AddItemModal } from 'app/add-item/add-item.modal';
 
 @NgModule({
     declarations: [
@@ -18,7 +19,8 @@ import { SettingsPage } from 'app/settings/settings.page';
         SideBarComponent,
         SideBarLinkComponent,
         TopBarComponent,
-        SettingsPage,
+        SettingsModal,
+        AddItemModal,
         UnrecognizedPage,
         HomePage,
     ],

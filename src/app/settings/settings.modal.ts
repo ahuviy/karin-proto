@@ -4,11 +4,11 @@ import { FormControl } from '@angular/forms';
 import { SettingsService } from 'app/core/settings.service';
 
 @Component({
-    selector: 'kp-settings-page',
-    styleUrls: ['./settings.page.scss'],
-    templateUrl: './settings.page.html'
+    selector: 'kp-settings-modal',
+    styleUrls: ['./settings.modal.scss'],
+    templateUrl: './settings.modal.html'
 })
-export class SettingsPage {
+export class SettingsModal {
     @Output() saved = new EventEmitter();
 
     vatCtrl: FormControl;

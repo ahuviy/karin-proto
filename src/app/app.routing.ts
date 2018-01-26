@@ -8,7 +8,6 @@ const routes: Routes = [
     { path: '', pathMatch: 'full', component: HomePage },
     { path: 'materials', loadChildren: 'app/materials/materials.module#MaterialsModule' },
     { path: 'items', loadChildren: 'app/items/items.module#ItemsModule' },
-    // { path: 'settings', loadChildren: 'app/settings/settings.module#SettingsModule' },
     { path: 'unrecognized', component: UnrecognizedPage },
     { path: '**', redirectTo: 'unrecognized' },
 ];
