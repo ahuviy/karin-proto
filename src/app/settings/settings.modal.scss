@@ -1,32 +1,12 @@
-$borderColor: #e0e0e0;
+@import 'vars';
 
 :host {
     display: block;
     height: 100%;
 }
 
-.title {
-    border-bottom: 1px solid $borderColor;
-    box-sizing: border-box;
-    color: #212121;
-    font-size: 16px;
-    height: 60px;
-    line-height: 60px;
-    padding: 0 24px;
-    position: absolute;
-    text-align: right;
-    width: 600px;
-}
-
-.body {
-    box-sizing: border-box;
-    height: 100%;
-    padding-top: 60px;
-    display: flex;
-}
-
 .tabslist {
-    border-left: 1px solid $borderColor;
+    border-left: 1px solid $modalSepColor;
     height: 100%;
     width: 168px;
 }

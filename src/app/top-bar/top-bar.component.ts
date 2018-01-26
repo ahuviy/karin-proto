@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 
 import { SideNavService } from 'app/core/side-nav.service';
 import { routeLabels } from 'constants/route.consts';
@@ -13,7 +13,6 @@ import { routeLabels } from 'constants/route.consts';
 export class TopBarComponent {
     currentRoute$ = this.router.events.pipe(
         filter(e => e instanceof NavigationEnd),
-        tap(e => console.log(e)),
         map((e: NavigationEnd) => routeLabels[e.urlAfterRedirects]),
     );
     showSettingsModal = false;

@@ -1,4 +1,6 @@
-import { Component, Input, HostBinding, HostListener, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, HostBinding, HostListener, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { fromEvent } from 'rxjs/observable/fromEvent';
+import { filter } from 'rxjs/operators';
 
 @Component({
     selector: 'kp-modal',
@@ -7,8 +9,6 @@ import { Component, Input, HostBinding, HostListener, Output, EventEmitter, View
     encapsulation: ViewEncapsulation.None,
 })
 export class ModalComponent {
-    @Input() cssClass = '';
-
     @Output() hasClosed = new EventEmitter();
     @Output() hasOpened = new EventEmitter();
 
@@ -19,6 +19,23 @@ export class ModalComponent {
         this.close();
     }
 
+    private escSub;
+
+    ngOnInit() {
+        this.escSub = fromEvent(window, 'keyup').pipe(
+            filter((e: KeyboardEvent) => e.key === 'Escape'),
+            filter((e: KeyboardEvent) => this.isOpen),
+        ).subscribe(e => this.close());
+    }
+
+    ngOnDestroy() {
+        this.escSub.unsubscribe();
+    }
+
+    get isOpen() {
+        return (this.visibility === 'visible');
+    }
+
     open() {
         this.visibility = 'visible';
         this.hasOpened.emit();
@@ -27,5 +44,9 @@ export class ModalComponent {
     close() {
         this.visibility = 'hidden';
         this.hasClosed.emit();
+    }
+
+    onEscKey = (e) => {
+        console.log(e);
     }
 }
