@@ -10,21 +10,11 @@ import { MaterialsService } from 'app/core/materials.service';
     templateUrl: './add-item.modal.html',
 })
 export class AddItemModal {
-    constructor(
-        private fb: FormBuilder,
-        private materialsService: MaterialsService,
-        private route: ActivatedRoute,
-        private router: Router,
-    ) { }
-
-    addForm: FormGroup = this.fb.group({
-        name: [null, Validators.required],
-        distributorName: [null, Validators.required],
-        weight: [null, Validators.required],
-        weightUnit: [null, Validators.required],
-        price: [null, Validators.required],
-    });
-
+    tabs = [
+        { id: 'material', text: 'חומר גלם', isActive: true },
+        { id: 'composite', text: 'פריט יצור', isActive: false },
+    ];
+    addForm: FormGroup = this.initForm('material');
     formCfg = [
         { label: 'שם', ctrlKey: 'name', inputType: 'text' },
         { label: 'ספק', ctrlKey: 'distributorName', inputType: 'text' },
@@ -33,9 +23,50 @@ export class AddItemModal {
         { label: 'מחיר בש״ח', ctrlKey: 'price', inputType: 'number' },
     ];
 
+    constructor(
+        private fb: FormBuilder,
+        private materialsService: MaterialsService,
+        private route: ActivatedRoute,
+        private router: Router,
+    ) { window['ahuvi'] = this; }
+
     add() {
         this.materialsService.add(this.addForm.value).then(() => {
             this.router.navigate(['..'], { relativeTo: this.route });
+        });
+    }
+
+    selectTab(tab) {
+        this.tabs.forEach(t => t.isActive = (tab.id === t.id));
+        this.addForm = this.initForm(tab.id);
+    }
+
+    initForm(type) {
+        switch (type) {
+            case 'material':
+                return this.initMaterialForm();
+            case 'composite':
+                return this.initCompositeForm();
+        }
+    }
+
+    private initMaterialForm() {
+        return this.fb.group({
+            name: [null, Validators.required],
+            distributorName: [null, Validators.required],
+            weight: [null, Validators.required],
+            weightUnit: [null, Validators.required],
+            price: [null, Validators.required],
+        });
+    }
+
+    private initCompositeForm() {
+        return this.fb.group({
+            name: [null, Validators.required],
+            distributorName: [null, Validators.required],
+            weight: [null, Validators.required],
+            weightUnit: [null, Validators.required],
+            price: [null, Validators.required],
         });
     }
 }

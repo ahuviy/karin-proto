@@ -1,12 +1,23 @@
 <div class="modal-title">הוספת פריט</div>
-<form class="modal-body" [formGroup]="addForm" (ngSubmit)="add()">
-    <div>
-        <label *ngFor="let item of formCfg">
-            <span>{{item.label}}</span>
-            <input [type]="item.inputType" [formControlName]="item.ctrlKey">
-        </label>
-        <button class="submit-btn" type="submit" [disabled]="addForm.invalid">
-            הוסף
-        </button>
+<div class="modal-body">
+    <div class="tabslist">
+        <div class="tab" *ngFor="let t of tabs"
+            [class.active]="t.isActive"
+            (click)="selectTab(t)">
+            {{t.text}}
+        </div>
     </div>
-</form>
+    <form class="tabpanel" [formGroup]="addForm" (ngSubmit)="add()">
+        <div class="inputs">
+            <label *ngFor="let item of formCfg">
+                <span class="input-label">{{item.label}}</span>
+                <input [type]="item.inputType" [formControlName]="item.ctrlKey">
+            </label>
+        </div>
+        <div class="tabbtn">
+            <button class="submit-btn" type="submit" [disabled]="addForm.invalid">
+                הוסף
+            </button>
+        </div>
+    </form>
+</div>
