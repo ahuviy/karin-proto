@@ -1,19 +1,15 @@
-import * as storage from './functions/local-storage.functions';
-import { Db } from './db.interface';
-import { DB_KEY } from './db.consts';
-import { getInitialDb } from './functions/init.functions';
+import { usersApi } from './apis/users.api';
+import { settingsApi } from './apis/settings.api';
+import { distributorsApi } from './apis/distributors.api';
+import { itemCategoriesApi } from './apis/item-categories.api';
+import { baseItemsApi } from './apis/base-items.api';
+import { compositeItemsApi } from './apis/composite-items.api';
 
-let cachedDb: Db;
-
-export function getDb(): Db {
-    if (!cachedDb) {
-        const savedDb = storage.get(DB_KEY);
-        if (savedDb) {
-            cachedDb = savedDb;
-        } else {
-            cachedDb = getInitialDb();
-            storage.set(DB_KEY, cachedDb);
-        }
-    }
-    return cachedDb;
-}
+export const db = {
+    users: usersApi,
+    distributors: distributorsApi,
+    settings: settingsApi,
+    baseItems: baseItemsApi,
+    compositeItems: compositeItemsApi,
+    itemCategories: itemCategoriesApi,
+};

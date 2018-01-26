@@ -1,13 +1,13 @@
-import * as Db from '../db.interface';
+import { Db, User, BaseItem, CompositeItem, ItemCategory, Distributor, Settings } from '../db.model';
 
 let currentId = 1;  // ids will be assigned in ascending numerical order starting from 1.
 
-function getId(): string {
+export function getId(): string {
     let newId = currentId++;
     return newId.toString();
 }
 
-export function getInitialDb(): Db.Db {
+export function getInitialDb(): Db {
     const users = initUsers();
     const settings = initSettings();
     const distributors = initDistributors();
@@ -17,7 +17,7 @@ export function getInitialDb(): Db.Db {
 
     return { users, settings, distributors, baseItems, compositeItems, itemCategories };
 
-    function initUsers(): Db.User[] {
+    function initUsers(): User[] {
         return [
             {
                 id: getId(),
@@ -29,7 +29,7 @@ export function getInitialDb(): Db.Db {
         ];
     }
 
-    function initSettings(): Db.Settings[] {
+    function initSettings(): Settings[] {
         return [
             {
                 id: getId(),
@@ -41,7 +41,7 @@ export function getInitialDb(): Db.Db {
         ];
     }
 
-    function initDistributors(): Db.Distributor[] {
+    function initDistributors(): Distributor[] {
         return ['אפי', 'עומרי', 'גיורא'].map(n => ({
             id: getId(),
             userId: users[0].id,
@@ -49,7 +49,7 @@ export function getInitialDb(): Db.Db {
         }));
     }
 
-    function initBaseItems(): Db.BaseItem[] {
+    function initBaseItems(): BaseItem[] {
         return [
             {
                 id: getId(),
@@ -64,11 +64,11 @@ export function getInitialDb(): Db.Db {
         ];
     }
 
-    function initCompositeItems(): Db.CompositeItem[] {
+    function initCompositeItems(): CompositeItem[] {
         return [];
     }
 
-    function initItemCategories(): Db.ItemCategory[] {
+    function initItemCategories(): ItemCategory[] {
         return [];
     }
 }
