@@ -4,6 +4,7 @@ import { DecimalPipe } from '@angular/common';
 import { SettingsService } from './settings.service';
 import { SideNavService } from './side-nav.service';
 import { MaterialsService } from './materials.service';
+import { AddItemService } from './add-item.service';
 
 @NgModule({
     providers: [
@@ -11,6 +12,7 @@ import { MaterialsService } from './materials.service';
         SettingsService,
         SideNavService,
         MaterialsService,
+        AddItemService,
     ]
 })
 export class CoreModule {

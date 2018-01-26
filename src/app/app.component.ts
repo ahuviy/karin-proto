@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 import { SideNavService } from 'app/core/side-nav.service';
+import { AddItemService } from 'app/core/add-item.service';
 
 @Component({
     selector: 'app-root',
@@ -10,5 +11,8 @@ import { SideNavService } from 'app/core/side-nav.service';
 export class AppComponent {
     showSideNav$ = this.sideNavService.isOpen$;
 
-    constructor(private sideNavService: SideNavService) { }
+    constructor(
+        private sideNavService: SideNavService,
+        public addItemService: AddItemService,
+    ) { }
 }
