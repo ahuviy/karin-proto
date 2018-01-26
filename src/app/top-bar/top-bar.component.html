@@ -1,6 +1,20 @@
 <div class="title-section">
     <button class="menu-btn" type="button" (click)="toggleSideNav()">
-        <i class="fa fa-bars" aria-hidden="true"></i>
+        <i class="fa fa-bars"></i>
     </button>
-    <span id="home-link" routerLink="">המתמחר</span>
+    <span>{{currentRoute$ | async}}</span>
+</div>
+<div class="searchbar-wrapper">
+    <div class="icon-wrapper flex-center-center">
+        <i class="fa fa-search"></i>
+    </div>
+    <input class="searchbar" placeholder="חיפוש">
+</div>
+<div class="settings-wrapper flex-center-center">
+    <i class="fa fa-lg fa-cog clickable" (click)="showSettingsModal = true"></i>
+    <div class="modal-backdrop flex-center-center" *ngIf="showSettingsModal" (click)="showSettingsModal=false">
+        <div class="settings-modal" (click)="$event.stopPropagation()">
+            <kp-settings-page (saved)="showSettingsModal=false"></kp-settings-page>
+        </div>
+    </div>
 </div>

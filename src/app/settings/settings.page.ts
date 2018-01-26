@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 import { SettingsService } from 'app/core/settings.service';
@@ -9,8 +9,14 @@ import { SettingsService } from 'app/core/settings.service';
     templateUrl: './settings.page.html'
 })
 export class SettingsPage {
+    @Output() saved = new EventEmitter();
+
     vatCtrl: FormControl;
     subs = [];
+    tabs = [
+        { id: 'money', text: 'כספים', isActive: true },
+        { id: 'time', text: 'זמנים', isActive: false },
+    ];
 
     constructor(private settingsService: SettingsService) { }
 
@@ -27,6 +33,12 @@ export class SettingsPage {
     save() {
         this.settingsService.update({
             percentVat: this.vatCtrl.value
+        }).then(() => {
+            this.saved.emit();
         });
+    }
+
+    selectTab(tab) {
+        this.tabs.forEach(t => t.isActive = (tab.id === t.id));
     }
 }

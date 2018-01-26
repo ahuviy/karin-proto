@@ -35,23 +35,6 @@
     height: 100%;
     box-sizing: border-box;
     padding-top: $headerHeight;
-    width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
-
-    @media (max-width: 1800px) {
-        width: 66.66%;
-    }
-
-    @media (max-width: 1260px) {
-        width: 840px;
-    }
-
-    @media (max-width: 920px) {
-        width: auto;
-        margin-left: 40px;
-        margin-right: 40px;
-    }
 
     &.side-nav-shown {
         @media (max-width: 1632px) {

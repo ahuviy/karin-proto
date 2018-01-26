@@ -1,8 +1,21 @@
-<h1 class="title">הגדרות</h1>
-<form (ngSubmit)="save()">
-    <label>
-        מע״מ
-        <input class="vat-input" [formControl]="vatCtrl">
-    </label>
-    <button class="submit-btn" type="submit">שמור</button>
-</form>
+<div class="title">הגדרות</div>
+<div class="body">
+    <div class="tabslist">
+        <div class="tab" *ngFor="let t of tabs"
+            [class.active]="t.isActive"
+            (click)="selectTab(t)">
+            {{t.text}}
+        </div>
+    </div>
+    <form class="tabpanel" (ngSubmit)="save()">
+        <div class="tabform">
+            <label>
+                מע״מ
+                <input class="vat-input" [formControl]="vatCtrl">
+            </label>
+        </div>
+        <div class="tabbtn">
+            <button class="submit-btn" type="submit">שמור</button>
+        </div>
+    </form>
+</div>

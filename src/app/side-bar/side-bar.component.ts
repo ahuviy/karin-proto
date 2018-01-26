@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { routeLabels } from 'constants/route.consts';
+
 @Component({
     selector: 'kp-side-bar',
     templateUrl: './side-bar.component.html',
@@ -7,8 +9,23 @@ import { Component } from '@angular/core';
 })
 export class SideBarComponent {
     links = [
-        { url: 'materials', options: {}, text: 'חומרי גלם' },
-        { url: 'items', options: {}, text: 'פריטים' },
-        { url: 'settings', options: {}, text: 'הגדרות' },
+        {
+            url: '/',
+            options: { exact: true },
+            text: routeLabels['/'],
+            icon: 'archive',
+        },
+        {
+            url: '/materials',
+            options: {},
+            text: routeLabels['/materials'],
+            icon: 'truck',
+        },
+        {
+            url: '/items',
+            options: {},
+            text: routeLabels['/items'],
+            icon: 'truck',
+        },
     ];
 }

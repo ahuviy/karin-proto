@@ -10,6 +10,7 @@ import { HomePage } from './home/home.page';
 import { UnrecognizedPage } from './unrecognized/unrecogrnized.page';
 import { CoreModule } from 'app/core/core.module';
 import { SharedModule } from 'app/shared/shared.module';
+import { SettingsPage } from 'app/settings/settings.page';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import { SharedModule } from 'app/shared/shared.module';
         SideBarComponent,
         SideBarLinkComponent,
         TopBarComponent,
+        SettingsPage,
         UnrecognizedPage,
         HomePage,
     ],

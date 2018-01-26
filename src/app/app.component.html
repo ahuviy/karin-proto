@@ -4,6 +4,6 @@
 <nav class="side-bar" disappearing-scroll [class.show]="showSideNav$ | async">
     <kp-side-bar></kp-side-bar>
 </nav>
-<div class="body" [class.side-nav-shown]="showSideNav$ | async">
+<div class="body responsive-container" [class.side-nav-shown]="showSideNav$ | async">
     <router-outlet></router-outlet>
 </div>

@@ -8,6 +8,11 @@
 
     &[active=true] {
         background-color: rgba(0, 0, 0, 0.05);
+
+        span {
+            font-weight: 800;
+            color: black;
+        }
     }
 }
 
@@ -25,4 +30,9 @@ span {
     text-overflow: ellipsis;
     white-space: nowrap;
     flex-grow: 1;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+i {
+    color: #616161;
 }
