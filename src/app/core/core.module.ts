@@ -3,16 +3,18 @@ import { DecimalPipe } from '@angular/common';
 
 import { SettingsService } from './settings.service';
 import { SideNavService } from './side-nav.service';
-import { MaterialsService } from './materials.service';
+import { BaseItemsService } from './base-items.service';
 import { AddItemService } from './add-item.service';
+import { UserService } from './user.service';
 
 @NgModule({
     providers: [
         DecimalPipe,
         SettingsService,
         SideNavService,
-        MaterialsService,
+        BaseItemsService,
         AddItemService,
+        UserService,
     ]
 })
 export class CoreModule {

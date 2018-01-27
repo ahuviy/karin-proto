@@ -1,17 +1,27 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { Settings, MOCK_SETTINGS } from './settings.mocks';
+import { api, Settings } from 'server';
 
 @Injectable()
 export class SettingsService {
-    private _settings$ = new BehaviorSubject<Settings>(MOCK_SETTINGS);
-    settings$ = this._settings$.asObservable();
+    private _settings$ = new BehaviorSubject<Settings>(null);
+    readonly settings$ = this._settings$.asObservable();
     get settings() { return this._settings$.getValue(); }
 
-    update(newVal): Promise<Settings> {
-        const toUpdate = Object.assign({}, this.settings, newVal);
-        this._settings$.next(toUpdate);
-        return Promise.resolve(toUpdate);
+    refresh() {
+        api.settings.get().then(res => {
+            this._settings$.next(res);
+        });
+    }
+
+    update(updated: Partial<Settings>): Promise<Settings> {
+        return new Promise((resolve, reject) => {
+            const toUpdate = Object.assign({}, this.settings, updated);
+            api.settings.update(toUpdate).then(res => {
+                this._settings$.next(res);
+                resolve(res);
+            }, reject);
+        });
     }
 }

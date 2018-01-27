@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { MaterialsService } from 'app/core/materials.service';
+import { BaseItemsService } from 'app/core/base-items.service';
 
 @Component({
     selector: 'kp-add-item',
@@ -25,13 +25,13 @@ export class AddItemModal {
 
     constructor(
         private fb: FormBuilder,
-        private materialsService: MaterialsService,
+        private BaseItemsService: BaseItemsService,
         private route: ActivatedRoute,
         private router: Router,
     ) { window['ahuvi'] = this; }
 
     add() {
-        this.materialsService.add(this.addForm.value).then(() => {
+        this.BaseItemsService.add(this.addForm.value).then(() => {
             this.router.navigate(['..'], { relativeTo: this.route });
         });
     }

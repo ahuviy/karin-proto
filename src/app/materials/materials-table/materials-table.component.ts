@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { filter } from 'rxjs/operators';
 
-import { MaterialsService } from 'app/core/materials.service';
-import { Material } from 'app/core/materials.mocks';
+import { BaseItemsService } from 'app/core/base-items.service';
+import { BaseItem } from 'server/server.interface';
 
 @Component({
     selector: 'kp-materials-table',
@@ -11,10 +11,10 @@ import { Material } from 'app/core/materials.mocks';
 })
 export class MaterialsTableComponent {
     constructor(
-        private materialsService: MaterialsService,
+        private BaseItemsService: BaseItemsService,
     ) { }
 
-    materials$ = this.materialsService.materials$.pipe(filter(m => !!m));
+    materials$ = this.BaseItemsService.baseItems$.pipe(filter(m => !!m));
 
-    trackByMaterials(i: number, m: Material) { return m.id; }
+    trackByMaterials(i: number, m: BaseItem) { return m.id; }
 }

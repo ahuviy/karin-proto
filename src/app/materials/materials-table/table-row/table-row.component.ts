@@ -3,10 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { DecimalPipe } from '@angular/common';
 import { map, combineLatest } from 'rxjs/operators';
 
-import { Material } from 'app/core/materials.mocks';
-import { MaterialsService } from 'app/core/materials.service';
+import { BaseItemsService } from 'app/core/base-items.service';
 import { SettingsService } from 'app/core/settings.service';
-import { Settings } from 'app/core/settings.mocks';
+import { BaseItem } from 'server/server.interface';
 
 @Component({
     changeDetection: ChangeDetectionStrategy.OnPush,
@@ -15,7 +14,7 @@ import { Settings } from 'app/core/settings.mocks';
     templateUrl: './table-row.component.html',
 })
 export class TableRowComponent {
-    @Input() material: Material;
+    @Input() material: BaseItem;
 
     form: FormGroup;
     editMode = false;
@@ -24,20 +23,20 @@ export class TableRowComponent {
         private cd: ChangeDetectorRef,
         private decimal: DecimalPipe,
         private fb: FormBuilder,
-        private materialsService: MaterialsService,
+        private BaseItemsService: BaseItemsService,
         private settingsService: SettingsService,
     ) { }
 
     get price() {
-        return `${this.material.price} ${this.material.priceUnit}`;
+        return `${this.material.price} ש״ח`;
     }
 
     priceIncludingVat$ = this.settingsService.settings$.pipe(
-        combineLatest(this.materialsService.materials$),
+        combineLatest(this.BaseItemsService.baseItems$),
         map(([s, ms]) => {
             const mat = ms.find(m => m.id === this.material.id);
             const raw = mat.price * (1 + (s.percentVat / 100));
-            return `${this.decimal.transform(raw, '1.0-1')} ${mat.priceUnit}`;
+            return `${this.decimal.transform(raw, '1.0-1')} ש״ח`;
         }),
     );
 
@@ -49,7 +48,7 @@ export class TableRowComponent {
         this.editMode = true;
         this.form = this.fb.group({
             name: this.material.name,
-            distributorName: this.material.distributorName,
+            distributorName: this.material.distributorId,
             weight: this.material.weight,
             weightUnit: this.material.weightUnit,
             price: this.material.price,
@@ -65,10 +64,10 @@ export class TableRowComponent {
 
     save() {
         const newVal = Object.assign({}, this.material, this.form.value);
-        this.materialsService.update(newVal).then(this.cancelEdit.bind(this));
+        this.BaseItemsService.update(newVal).then(this.cancelEdit.bind(this));
     }
 
     delete() {
-        this.materialsService.delete(this.material.id);
+        this.BaseItemsService.delete(this.material.id);
     }
 }

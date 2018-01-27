@@ -3,14 +3,18 @@ import { DEFAULT_USER_ID } from './server.consts';
 import { User, Settings, Distributor, BaseItem, CompositeItem, ItemCategory } from './server.interface';
 
 export const api = {
-    
+
     user: {
         getCurrent(): Promise<User> {
             return Promise.resolve(getCurrentUser());
         }
     },
-    
+
     settings: {
+        get(): Promise<Settings> {
+            const user = getCurrentUser();
+            return Promise.resolve(user.settings);
+        },
         update(s: Partial<Settings>): Promise<Settings> {
             const user = getCurrentUser();
             Object.assign(user.settings, s);
@@ -18,7 +22,7 @@ export const api = {
             return Promise.resolve(user.settings);
         }
     },
-    
+
     distributor: {
         update(updated: Partial<Distributor>): Promise<Distributor> {
             const user = getCurrentUser();
@@ -44,6 +48,10 @@ export const api = {
     },
 
     baseItem: {
+        getAll(): Promise<BaseItem[]> {
+            const user = getCurrentUser();
+            return Promise.resolve(user.baseItems);
+        },
         update(updated: Partial<BaseItem>): Promise<BaseItem> {
             const user = getCurrentUser();
             const i = user.baseItems.findIndex(bi => bi.id === updated.id);
@@ -104,7 +112,7 @@ export const api = {
             return Promise.resolve({ success: true, err: null });
         }
     },
-    
+
     itemCategories: {
         update(updated: Partial<ItemCategory>): Promise<ItemCategory> {
             const user = getCurrentUser();
@@ -128,7 +136,7 @@ export const api = {
             const i = user.itemCategories.findIndex(ic => ic.id === id);
             user.itemCategories.splice(i, 1);
             saveDb();
-            
+
             return Promise.resolve({ success: true, err: null });
 
             function clearDeletedCategory(item) {
