@@ -6,59 +6,44 @@ export interface User {
     password: string;
     firstName: string;
     lastName: string;
-}
-
-export interface Settings {
-    id: string;
-    userId: string;
-    percentVat: number;
-    currency: {
-        id: string;
-        label: string;
+    settings: {
+        percentVat: number;
+        currency: {
+            name: string;
+            symbol: string;
+        };
+        workCostPerHour: number;
     };
-    workCostPerHour: number;
-}
-
-export interface Distributor {
-    id: string;
-    userId: string;
-    name: string;
-}
-
-export interface ItemCategory {
-    id: string;
-    userId: string;
-    name: string;
-    baseItemIds: string[];  // baseItems that are attached to this category
-    compositeItemIds: string[];  // compositeItems that are attached to this category
-}
-
-export interface BaseItem {
-    id: string;
-    userId: string;
-    distributorId: string;
-    compositeItemIds: string[];  // compositeItems that are using this baseItem
-    name: string;
-    weight: number;
-    weightUnit: WeightUnit;
-    price: number;
-}
-
-export interface CompositeItem {
-    id: string;
-    userId: string;
-    hoursOfWork: number;
+    distributors: {
+        id: string;
+        name: string;
+        phoneNumber: string;
+    }[];
+    itemCategories: {
+        id: string;
+        name: string;
+    }[];
     baseItems: {
         id: string;
-        amount: number;
+        distributorId: string;
+        compositeItemIds: string[];  // compositeItems that are using this baseItem
+        name: string;
+        weight: number;
+        weightUnit: WeightUnit;
+        price: number;
+        itemCategoryId: string;
+    }[];
+    compositeItems: {
+        id: string;
+        hoursOfWork: number;
+        ingredients: {
+            baseItemId: string;
+            amount: number;
+        }[];
+        itemCategoryId: string;
     }[];
 }
 
 export interface Db {
     users: User[];
-    settings: Settings[];
-    distributors: Distributor[];
-    baseItems: BaseItem[];
-    compositeItems: CompositeItem[];
-    itemCategories: ItemCategory[];
 }
