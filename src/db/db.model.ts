@@ -38,7 +38,6 @@ export interface ItemCategory {
 export interface BaseItem {
     id: string;
     distributorId: string;
-    compositeItemIds: string[];  // compositeItems that are using this baseItem
     name: string;
     weight: number;
     weightUnit: WeightUnit;

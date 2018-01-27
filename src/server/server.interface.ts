@@ -1,19 +1,21 @@
-export type WeightUnit = 'gram' | 'kilogram';
-
 export interface User {
     id: string;
     username: string;
     password: string;
     firstName: string;
     lastName: string;
+    settings: Settings;
+    distributors: Distributor[];
+    itemCategories: ItemCategory[];
+    baseItems: BaseItem[];
+    compositeItems: CompositeItem[];
 }
 
 export interface Settings {
-    id: string;
     percentVat: number;
     currency: {
-        id: string;
-        label: string;
+        name: string;
+        symbol: string;
     };
     workCostPerHour: number;
 }
@@ -21,30 +23,32 @@ export interface Settings {
 export interface Distributor {
     id: string;
     name: string;
+    phoneNumber: string;
 }
 
 export interface BaseItem {
     id: string;
+    distributorId: string;
     name: string;
     weight: number;
     weightUnit: WeightUnit;
     price: number;
-    distributor: Distributor;
-    hasCompositeItems: boolean;
+    itemCategoryId: string;
 }
 
 export interface CompositeItem {
     id: string;
     hoursOfWork: number;
-    baseItems: {
-        id: string;
+    ingredients: {
+        baseItemId: string;
         amount: number;
     }[];
+    itemCategoryId: string;
 }
 
 export interface ItemCategory {
     id: string;
     name: string;
-    baseItems: BaseItem[];  // baseItems that are attached to this category
-    compositeItems: CompositeItem[];  // compositeItems that are attached to this category
 }
+
+export type WeightUnit = 'gram' | 'kilogram';
