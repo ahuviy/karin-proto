@@ -1,15 +1,24 @@
-import { usersApi } from './apis/users.api';
-import { settingsApi } from './apis/settings.api';
-import { distributorsApi } from './apis/distributors.api';
-import { itemCategoriesApi } from './apis/item-categories.api';
-import { baseItemsApi } from './apis/base-items.api';
-import { compositeItemsApi } from './apis/composite-items.api';
+import * as storage from './functions/local-storage.functions';
+import { Db, BaseItem } from './db.model';
+import { DB_KEY } from './db.consts';
+import { getInitialDb } from './functions/init.functions';
 
-export const db = {
-    users: usersApi,
-    distributors: distributorsApi,
-    settings: settingsApi,
-    baseItems: baseItemsApi,
-    compositeItems: compositeItemsApi,
-    itemCategories: itemCategoriesApi,
-};
+let cachedDb: Db;
+
+export function getDb(): Db {
+    if (!cachedDb) {
+        const savedDb = storage.get(DB_KEY);
+        if (savedDb) {
+            cachedDb = savedDb;
+        } else {
+            cachedDb = getInitialDb();
+            storage.set(DB_KEY, cachedDb);
+        }
+    }
+    return cachedDb;
+}
+
+export function saveDb() {
+    if (!cachedDb) throw 'cannot save a non-existent db';
+    storage.set(DB_KEY, cachedDb);
+}

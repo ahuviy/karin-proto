@@ -8,58 +8,48 @@ export function getId(): string {
 }
 
 export function getInitialDb(): Db {
-    const users = initUsers();
-    const settings = initSettings();
-    const distributors = initDistributors();
-    const baseItems = initBaseItems();
-    const compositeItems = initCompositeItems();
-    const itemCategories = initItemCategories();
+    const user: User = {
+        id: getId(),
+        username: 'ahuviy',
+        password: 'qwer1234',
+        firstName: 'אהובי',
+        lastName: 'יערים',
+        settings: {
+            percentVat: 18,
+            currency: { name: 'שקלים', symbol: 'ש״ח' },
+            workCostPerHour: 10,
+        },
+        distributors: [],
+        itemCategories: [],
+        baseItems: [],
+        compositeItems: [],
+    };
+    user.distributors = initDistributors();
+    user.baseItems = initBaseItems();
+    user.compositeItems = initCompositeItems();
+    user.itemCategories = initItemCategories();
 
-    return { users, settings, distributors, baseItems, compositeItems, itemCategories };
-
-    function initUsers(): User[] {
-        return [
-            {
-                id: getId(),
-                firstName: 'אהובי',
-                lastName: 'יערים',
-                username: 'ahuviy',
-                password: 'qwer1234',
-            },
-        ];
-    }
-
-    function initSettings(): Settings[] {
-        return [
-            {
-                id: getId(),
-                userId: users[0].id,
-                percentVat: 18,
-                workCostPerHour: 10,
-                currency: { id: getId(), label: 'ש״ח' },
-            },
-        ];
-    }
+    return { users: [user] };
 
     function initDistributors(): Distributor[] {
-        return ['אפי', 'עומרי', 'גיורא'].map(n => ({
-            id: getId(),
-            userId: users[0].id,
-            name: n,
-        }));
+        return [
+            { id: getId(), name: 'אפי', phoneNumber: '0541234561' },
+            { id: getId(), name: 'שלומי', phoneNumber: '0528769696' },
+            { id: getId(), name: 'גיורא', phoneNumber: '0504437722' },
+        ];
     }
 
     function initBaseItems(): BaseItem[] {
         return [
             {
                 id: getId(),
-                userId: users[0].id,
-                distributorId: distributors[0].id,
+                distributorId: user.distributors[0].id,
                 compositeItemIds: [],
                 name: 'אורז בסמטי',
                 weight: 250,
                 weightUnit: 'gram',
                 price: 12,
+                itemCategoryId: null,
             },
         ];
     }
