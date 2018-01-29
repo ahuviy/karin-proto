@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { map } from 'rxjs/operators';
 
 import { routeLabels } from 'constants/route.consts';
+import { ItemCategoriesService } from 'app/core/item-categories.service';
 
 @Component({
     selector: 'kp-side-bar',
@@ -28,4 +30,19 @@ export class SideBarComponent {
             icon: 'truck',
         },
     ];
+    categories$ = this.itemCategoriesService.itemCategories$.pipe(
+        map(ic => ic || []),
+        map(arr => arr.map(ic => ({
+            url: `/category/${ic.id}`,
+            options: {},
+            text: ic.name,
+            icon: 'truck',
+        }))),
+    );
+
+    constructor(private itemCategoriesService: ItemCategoriesService) { }
+
+    ngOnInit() {
+        this.itemCategoriesService.refresh();
+    }
 }

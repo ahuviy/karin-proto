@@ -79,6 +79,9 @@ function getInitialDb(): Db {
     }
 
     function initItemCategories(): ItemCategory[] {
-        return [];
+        return [
+            { id: getId(), name: 'מסות' },
+            { id: getId(), name: 'עוגות' },
+        ];
     }
 }
