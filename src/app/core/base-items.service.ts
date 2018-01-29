@@ -5,7 +5,7 @@ import { api, BaseItem } from 'server';
 
 @Injectable()
 export class BaseItemsService {
-    private _baseItems$ = new BehaviorSubject<BaseItem[]>([]);
+    private _baseItems$ = new BehaviorSubject<BaseItem[]>(null);
     readonly baseItems$ = this._baseItems$.asObservable();
     get baseItems() { return this._baseItems$.getValue(); }
 
@@ -15,11 +15,12 @@ export class BaseItemsService {
         });
     }
 
-    add(baseItem: BaseItem): Promise<BaseItem> {
+    add(baseItem: Partial<BaseItem>): Promise<BaseItem[]> {
         return new Promise((resolve, reject) => {
             api.baseItem.create(baseItem).then(res => {
-                this._baseItems$.next(this.baseItems.concat(res));
-                resolve(res);
+                const newBaseItems = this.baseItems.concat(res);
+                this._baseItems$.next(newBaseItems);
+                resolve(newBaseItems);
             }, reject);
         });
     }
@@ -37,14 +38,14 @@ export class BaseItemsService {
         });
     }
 
-    update(updated: BaseItem): Promise<BaseItem> {
+    update(updated: BaseItem): Promise<BaseItem[]> {
         return new Promise((resolve, reject) => {
             api.baseItem.update(updated).then(res => {
                 const current = this.baseItems;
                 const i = current.findIndex(bi => bi.id === updated.id);
                 current[i] = res;
                 this._baseItems$.next(current);
-                resolve(res);
+                resolve(current);
             }, reject);
         });
     }

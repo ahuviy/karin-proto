@@ -11,7 +11,7 @@ import { SettingsService } from 'app/core/settings.service';
 export class SettingsModal {
     @Output() saved = new EventEmitter();
 
-    vatCtrl: FormControl;
+    vatCtrl = new FormControl(null);
     subs = [];
     tabs = [
         { id: 'money', text: 'כספים', isActive: true },
@@ -21,8 +21,11 @@ export class SettingsModal {
     constructor(private settingsService: SettingsService) { }
 
     ngOnInit() {
+        this.settingsService.refresh();
         this.subs.push(this.settingsService.settings$.subscribe(s => {
-            this.vatCtrl = new FormControl(s.percentVat);
+            if (s) {
+                this.vatCtrl.patchValue(s.percentVat);
+            }
         }));
     }
 

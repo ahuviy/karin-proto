@@ -11,6 +11,13 @@ export interface User {
     compositeItems: CompositeItem[];
 }
 
+export interface UserBasic {
+    id: string;
+    username: string;
+    firstName: string;
+    lastName: string;
+}
+
 export interface Settings {
     percentVat: number;
     currency: {

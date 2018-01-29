@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { api, User } from 'server';
+import { api, UserBasic } from 'server';
 
 @Injectable()
 export class UserService {
-    private _user$ = new BehaviorSubject<User>(null);
+    private _user$ = new BehaviorSubject<UserBasic>(null);
     readonly user$ = this._user$.asObservable();
     get user() { return this._user$.getValue(); }
 

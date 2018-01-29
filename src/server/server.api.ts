@@ -1,42 +1,57 @@
+import * as cloneDeep from 'lodash/cloneDeep';
+
 import { getDb, saveDb, getId } from '../db/db.api';
 import { DEFAULT_USER_ID } from './server.consts';
-import { User, Settings, Distributor, BaseItem, CompositeItem, ItemCategory } from './server.interface';
+import { User, UserBasic, Settings, Distributor, BaseItem, CompositeItem, ItemCategory } from './server.interface';
 
 export const api = {
 
     user: {
-        getCurrent(): Promise<User> {
-            return Promise.resolve(getCurrentUser());
+        getCurrent(): Promise<UserBasic> {
+            const user = getCurrentUser();
+            return Promise.resolve({
+                id: user.id,
+                username: user.username,
+                firstName: user.firstName,
+                lastName: user.lastName,
+            });
         }
     },
 
     settings: {
         get(): Promise<Settings> {
             const user = getCurrentUser();
-            return Promise.resolve(user.settings);
+            return Promise.resolve(cloneDeep(user.settings));
         },
         update(s: Partial<Settings>): Promise<Settings> {
+            s = cloneDeep(s);
             const user = getCurrentUser();
             Object.assign(user.settings, s);
             saveDb();
-            return Promise.resolve(user.settings);
+            return Promise.resolve(cloneDeep(user.settings));
         }
     },
 
     distributor: {
+        getAll(): Promise<Distributor[]> {
+            const user = getCurrentUser();
+            return Promise.resolve(cloneDeep(user.distributors));
+        },
         update(updated: Partial<Distributor>): Promise<Distributor> {
+            updated = cloneDeep(updated);
             const user = getCurrentUser();
             const i = user.distributors.findIndex(d => d.id === updated.id);
             Object.assign(user.distributors[i], updated);
             saveDb();
-            return Promise.resolve(user.distributors[i]);
+            return Promise.resolve(cloneDeep(user.distributors[i]));
         },
-        create(created: Distributor): Promise<Distributor> {
+        create(created: Partial<Distributor>): Promise<Distributor> {
+            created = cloneDeep(created);
             const user = getCurrentUser();
             created.id = getId();
-            user.distributors.push(created);
+            user.distributors.push(created as Distributor);
             saveDb();
-            return Promise.resolve(created);
+            return Promise.resolve(cloneDeep(created));
         },
         delete(id: string): Promise<{ success: boolean; }> {
             const user = getCurrentUser();
@@ -50,21 +65,23 @@ export const api = {
     baseItem: {
         getAll(): Promise<BaseItem[]> {
             const user = getCurrentUser();
-            return Promise.resolve(user.baseItems);
+            return Promise.resolve(cloneDeep(user.baseItems));
         },
         update(updated: Partial<BaseItem>): Promise<BaseItem> {
+            updated = cloneDeep(updated);
             const user = getCurrentUser();
             const i = user.baseItems.findIndex(bi => bi.id === updated.id);
             Object.assign(user.baseItems[i], updated);
             saveDb();
-            return Promise.resolve(user.baseItems[i]);
+            return Promise.resolve(cloneDeep(user.baseItems[i]));
         },
-        create(created: BaseItem): Promise<BaseItem> {
+        create(created: Partial<BaseItem>): Promise<BaseItem> {
+            created = cloneDeep(created);
             const user = getCurrentUser();
             created.id = getId();
-            user.baseItems.push(created);
+            user.baseItems.push(created as BaseItem);
             saveDb();
-            return Promise.resolve(created);
+            return Promise.resolve(cloneDeep(created));
         },
         delete(id: string): Promise<{ success: boolean; err: any; }> {
             const user = getCurrentUser();
@@ -90,19 +107,25 @@ export const api = {
     },
 
     compositeItem: {
+        getAll(): Promise<CompositeItem[]> {
+            const user = getCurrentUser();
+            return Promise.resolve(cloneDeep(user.compositeItems));
+        },
         update(updated: Partial<CompositeItem>): Promise<CompositeItem> {
+            updated = cloneDeep(updated);
             const user = getCurrentUser();
             const i = user.compositeItems.findIndex(ci => ci.id === updated.id);
             Object.assign(user.compositeItems[i], updated);
             saveDb();
-            return Promise.resolve(user.compositeItems[i]);
+            return Promise.resolve(cloneDeep(user.compositeItems[i]));
         },
-        create(created: CompositeItem): Promise<CompositeItem> {
+        create(created: Partial<CompositeItem>): Promise<CompositeItem> {
+            created = cloneDeep(created);
             const user = getCurrentUser();
             created.id = getId();
-            user.compositeItems.push(created);
+            user.compositeItems.push(created as CompositeItem);
             saveDb();
-            return Promise.resolve(created);
+            return Promise.resolve(cloneDeep(created));
         },
         delete(id: string): Promise<{ success: boolean; err: any; }> {
             const user = getCurrentUser();
@@ -114,19 +137,25 @@ export const api = {
     },
 
     itemCategories: {
+        getAll(): Promise<ItemCategory[]> {
+            const user = getCurrentUser();
+            return Promise.resolve(cloneDeep(user.itemCategories));
+        },
         update(updated: Partial<ItemCategory>): Promise<ItemCategory> {
+            updated = cloneDeep(updated);
             const user = getCurrentUser();
             const i = user.itemCategories.findIndex(ic => ic.id === updated.id);
             Object.assign(user.itemCategories[i], updated);
             saveDb();
-            return Promise.resolve(user.itemCategories[i]);
+            return Promise.resolve(cloneDeep(user.itemCategories[i]));
         },
-        create(created: ItemCategory): Promise<ItemCategory> {
+        create(created: Partial<ItemCategory>): Promise<ItemCategory> {
+            created = cloneDeep(created);
             const user = getCurrentUser();
             created.id = getId();
-            user.itemCategories.push(created);
+            user.itemCategories.push(created as ItemCategory);
             saveDb();
-            return Promise.resolve(created);
+            return Promise.resolve(cloneDeep(created));
         },
         delete(id: string): Promise<{ success: boolean; err: any; }> {
             const user = getCurrentUser();
