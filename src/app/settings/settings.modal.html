@@ -7,15 +7,17 @@
             {{t.text}}
         </div>
     </div>
-    <form class="tabpanel" (ngSubmit)="save()">
+    <form class="tabpanel" [formGroup]="form" (ngSubmit)="save()">
         <div class="tabform">
-            <label>
-                מע״מ
-                <input class="vat-input" [formControl]="vatCtrl">
-            </label>
+            <mat-form-field class="max-width">
+                <input matInput type="number" placeholder="אחוז מע״מ" formControlName="percentVat">
+            </mat-form-field>
+            <mat-form-field class="max-width">
+                <input matInput type="number" placeholder="מחיר שעת עבודה בש״ח" formControlName="workCostPerHour">
+            </mat-form-field>
         </div>
         <div class="tabbtn">
-            <button class="submit-btn" type="submit">שמור</button>
+            <button mat-button type="submit" [disabled]="form.invalid">שמור</button>
         </div>
     </form>
 </div>

@@ -11,8 +11,5 @@
     <input class="searchbar" placeholder="חיפוש">
 </div>
 <div class="settings-wrapper flex-center-center">
-    <i class="fa fa-lg fa-cog clickable" (click)="settingsModal.open()"></i>
+    <i class="fa fa-lg fa-cog clickable" (click)="openSettingsModal()"></i>
 </div>
-<kp-modal #settingsModal>
-    <kp-settings-modal (saved)="settingsModal.close()"></kp-settings-modal>
-</kp-modal>

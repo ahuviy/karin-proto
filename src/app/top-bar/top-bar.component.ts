@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { MatDialog } from '@angular/material';
 import { filter, map } from 'rxjs/operators';
 
 import { SideNavService } from 'app/core/side-nav.service';
 import { routeLabels } from 'constants/route.consts';
+import { SettingsModal } from 'app/settings/settings.modal';
 
 @Component({
     selector: 'kp-top-bar',
@@ -15,14 +17,22 @@ export class TopBarComponent {
         filter(e => e instanceof NavigationEnd),
         map((e: NavigationEnd) => routeLabels[e.urlAfterRedirects]),
     );
-    showSettingsModal = false;
 
     constructor(
         private router: Router,
         private sideNavService: SideNavService,
+        private dialog: MatDialog,
     ) { }
 
     toggleSideNav() {
         this.sideNavService.toggle();
+    }
+
+    openSettingsModal() {
+        this.dialog.open(SettingsModal, {
+            direction: 'rtl',
+            panelClass: 'kp-settings-modal-wrapper',
+            height: '600px',
+        });
     }
 }

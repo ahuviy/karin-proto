@@ -1,5 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { SettingsService } from 'app/core/settings.service';
 
@@ -9,23 +10,28 @@ import { SettingsService } from 'app/core/settings.service';
     templateUrl: './settings.modal.html'
 })
 export class SettingsModal {
-    @Output() saved = new EventEmitter();
-
-    vatCtrl = new FormControl(null);
+    form: FormGroup = this.fb.group({
+        percentVat: [null, Validators.required],
+        workCostPerHour: [null, Validators.required],
+    });
     subs = [];
     tabs = [
         { id: 'money', text: 'כספים', isActive: true },
-        { id: 'time', text: 'זמנים', isActive: false },
     ];
 
-    constructor(private settingsService: SettingsService) { }
+    constructor(
+        private fb: FormBuilder,
+        private settingsService: SettingsService,
+        private dialogRef: MatDialogRef<SettingsModal>,
+        @Inject(MAT_DIALOG_DATA) private data: any,
+    ) { }
 
     ngOnInit() {
         this.settingsService.refresh();
         this.subs.push(this.settingsService.settings$.subscribe(s => {
-            if (s) {
-                this.vatCtrl.patchValue(s.percentVat);
-            }
+            if (!s) return;
+            this.form.patchValue(s);
+            this.form.markAsPristine();
         }));
     }
 
@@ -34,10 +40,8 @@ export class SettingsModal {
     }
 
     save() {
-        this.settingsService.update({
-            percentVat: this.vatCtrl.value
-        }).then(() => {
-            this.saved.emit();
+        this.settingsService.update(this.form.value).then(() => {
+            this.dialogRef.close('success');
         });
     }
 

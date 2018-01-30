@@ -1,8 +1,28 @@
-@import 'vars';
+@import "vars";
 
 :host {
     display: block;
     height: 100%;
+}
+
+.modal-title {
+    border-bottom: 1px solid $modalSepColor;
+    box-sizing: border-box;
+    color: #212121;
+    font-size: 16px;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 24px;
+    position: absolute;
+    text-align: right;
+    width: 600px;
+}
+
+.modal-body {
+    box-sizing: border-box;
+    height: 100%;
+    padding-top: 60px;
+    display: flex;
 }
 
 .tabslist {
@@ -43,6 +63,7 @@
 .tabform {
     overflow-y: auto;
     padding: 16px 24px 16px 16px;
+    padding-left: 12px;
     flex: 1;
 }
 
@@ -50,8 +71,9 @@
     line-height: 48px;
     max-height: 48px;
     min-height: 48px;
-    padding-left: 24px;
+    padding-left: 12px;
     text-align: left;
+    color: #3367d6;
 }
 
 .vat-input {

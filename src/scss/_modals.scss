@@ -1,21 +1,7 @@
 @import 'vars';
 
-.modal-title {
-    border-bottom: 1px solid $modalSepColor;
-    box-sizing: border-box;
-    color: #212121;
-    font-size: 16px;
-    height: 60px;
-    line-height: 60px;
-    padding: 0 24px;
-    position: absolute;
-    text-align: right;
-    width: 600px;
-}
-
-.modal-body {
-    box-sizing: border-box;
-    height: 100%;
-    padding-top: 60px;
-    display: flex;
+.kp-settings-modal-wrapper {
+    .mat-dialog-container {
+        padding: 0;
+    }
 }
