@@ -1,7 +1,8 @@
 export const routeLabels = {
     '/': 'כללי',
-    '/materials': 'חומרי גלם',
-    '/items': 'פריטים',
+    '/baseitems': 'חומרי גלם',
+    '/compositeitems': 'פריטים',
+    '/distributors': 'ספקים',
     '/settings': 'הגדרות',
     '/unrecognized': 'עמוד לא מזוהה',
 };

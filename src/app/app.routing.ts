@@ -6,8 +6,8 @@ import { UnrecognizedPage } from './unrecognized/unrecogrnized.page';
 
 const routes: Routes = [
     { path: '', pathMatch: 'full', component: HomePage },
-    { path: 'materials', loadChildren: 'app/materials/materials.module#MaterialsModule' },
-    { path: 'items', loadChildren: 'app/items/items.module#ItemsModule' },
+    { path: 'baseitems', loadChildren: 'app/baseitems/baseitems.module#BaseCompositeItemsModule' },
+    { path: 'compositeitems', loadChildren: 'app/compositeitems/compositeitems.module#CompositeItemsModule' },
     { path: 'category/:categoryId', loadChildren: 'app/categories/categories.module#CategoriesModule' },
     { path: 'unrecognized', component: UnrecognizedPage },
     { path: '**', redirectTo: 'unrecognized' },

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { MaterialModule } from './material.module';
+import { AngularMaterialModule } from './angular-material.module';
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -34,7 +34,7 @@ import { AddItemModal } from 'app/add-item/add-item.modal';
         BrowserAnimationsModule,
         CoreModule,
         SharedModule,
-        MaterialModule,
+        AngularMaterialModule,
         AppRouting,
     ],
     bootstrap: [AppComponent]

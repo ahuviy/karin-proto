@@ -18,15 +18,21 @@ export class SideBarComponent {
             icon: 'archive',
         },
         {
-            url: '/materials',
+            url: '/baseitems',
             options: {},
-            text: routeLabels['/materials'],
-            icon: 'truck',
+            text: routeLabels['/baseitems'],
+            icon: 'cutlery',
         },
         {
-            url: '/items',
+            url: '/compositeitems',
             options: {},
-            text: routeLabels['/items'],
+            text: routeLabels['/compositeitems'],
+            icon: 'cutlery',
+        },
+        {
+            url: '/distributors',
+            options: {},
+            text: routeLabels['/distributors'],
             icon: 'truck',
         },
     ];
@@ -36,7 +42,7 @@ export class SideBarComponent {
             url: `/category/${ic.id}`,
             options: {},
             text: ic.name,
-            icon: 'truck',
+            icon: 'folder',
         }))),
     );
 
