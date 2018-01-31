@@ -21,7 +21,7 @@ export class SideBarComponent {
             url: '/baseitems',
             options: {},
             text: routeLabels['/baseitems'],
-            icon: 'cutlery',
+            icon: 'diamond',
         },
         {
             url: '/compositeitems',
