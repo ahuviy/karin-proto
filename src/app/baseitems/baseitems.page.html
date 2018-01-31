@@ -1,16 +1,5 @@
 <mat-accordion class="items-list" multi="true" displayMode="default">
-    <mat-expansion-panel *ngFor="let a of [1,1,1,1,1,1,1,1,1,1,1]" hideToggle="true">
-        <mat-expansion-panel-header>
-            <mat-panel-title>שם החומר</mat-panel-title>
-            <mat-panel-description>איזה קטגוריה</mat-panel-description>
-        </mat-expansion-panel-header>
-    
-        <ng-template matExpansionPanelContent>
-            <p>This is the primary content of the panel.</p>
-            <mat-action-row>
-                <button mat-button>Click me</button>
-            </mat-action-row>
-        </ng-template>
-    
-    </mat-expansion-panel>
+    <kp-baseitems-entry *ngFor="let bi of baseItems$ | async"
+        [baseItem]="bi">
+    </kp-baseitems-entry>
 </mat-accordion>

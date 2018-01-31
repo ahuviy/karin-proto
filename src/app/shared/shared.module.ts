@@ -4,11 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DisappearingScrollDirective } from './directives/disappearingScroll.directive';
 import { ModalComponent } from './components/modal/modal.component';
+import { WeightUnitPipe } from './pipes/weight-unit.pipe';
 
 @NgModule({
     declarations: [
         DisappearingScrollDirective,
         ModalComponent,
+        WeightUnitPipe,
     ],
     imports: [
         CommonModule,
@@ -21,6 +23,7 @@ import { ModalComponent } from './components/modal/modal.component';
         ReactiveFormsModule,
         DisappearingScrollDirective,
         ModalComponent,
+        WeightUnitPipe,
     ],
 })
 export class SharedModule { }

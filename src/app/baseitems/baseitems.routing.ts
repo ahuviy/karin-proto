@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { BaseCompositeItemsPage } from './baseitems.page';
+import { BaseItemsPage } from './baseitems.page';
 
 const routes: Routes = [
-    { path: '', component: BaseCompositeItemsPage },
+    { path: '', component: BaseItemsPage },
 ];
 
 @NgModule({

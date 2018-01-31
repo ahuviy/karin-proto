@@ -6,6 +6,15 @@ import { BaseItemsService } from 'app/core/base-items.service';
     selector: 'kp-baseitems-page',
     styleUrls: ['./baseitems.page.scss'],
     templateUrl: './baseitems.page.html',
-    providers: [BaseItemsService],
 })
-export class BaseCompositeItemsPage { }
+export class BaseItemsPage {
+    baseItems$ = this.baseItemsService.baseItems$;
+
+    constructor(
+        private baseItemsService: BaseItemsService,
+    ) { }
+
+    ngOnInit() {
+        this.baseItemsService.refresh();
+    }
+}
