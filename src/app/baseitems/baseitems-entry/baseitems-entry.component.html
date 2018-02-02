@@ -1,20 +1,52 @@
 <mat-expansion-panel hideToggle="true">
     <mat-expansion-panel-header>
-        <mat-panel-title>{{baseItem.name}}</mat-panel-title>
+        <mat-panel-title>{{_baseItem.name}}</mat-panel-title>
         <mat-panel-description>
-            <span class="item-desc">{{baseItem.weight}} {{baseItem.weightUnit | weightUnit}}</span>
-            <span class="item-desc">{{baseItem.price}} {{currencySymbol$ | async}}</span>
+            <span class="item-desc">{{_baseItem.weight}} {{_baseItem.weightUnit | weightUnit}}</span>
+            <span class="item-desc">{{_baseItem.price}} {{currencySymbol$ | async}}</span>
             <span class="item-desc">{{category$ | async}}</span>
             <span class="item-desc">{{distributorName$ | async}}</span>
         </mat-panel-description>
     </mat-expansion-panel-header>
 
     <ng-template matExpansionPanelContent>
-        <p>צריך לאתחל טופס</p>
-        <mat-action-row>
-            <button class="delete-btn" mat-button>מחק</button>
-            <button class="save-btn" mat-button [disabled]="true">שמור</button>
-        </mat-action-row>
+        <form [formGroup]="form" (ngSubmit)="update()">
+            <mat-form-field>
+                <input matInput placeholder="שם" formControlName="name">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" placeholder="משקל ({{_baseItem.weightUnit | weightUnit}})"
+                    formControlName="weight">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" placeholder="מחיר ({{currencySymbol$ | async}})"
+                    formControlName="price">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="ספק" formControlName="distributorId">
+                    <mat-option *ngFor="let opt of distributorOptions$ | async" [value]="opt.id">
+                        {{opt.text}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="קטגוריה" formControlName="itemCategoryId">
+                    <mat-option *ngFor="let opt of itemCategoryOptions$ | async" [value]="opt.id">
+                        {{opt.text}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-action-row>
+                <button class="delete-btn" type="button" mat-button
+                    (click)="delete()">
+                    מחק
+                </button>
+                <button class="save-btn" type="submit" mat-button
+                    [disabled]="form.pristine || form.invalid">
+                    שמור
+                </button>
+            </mat-action-row>
+        </form>
     </ng-template>
 
 </mat-expansion-panel>
