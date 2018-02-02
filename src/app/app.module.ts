@@ -14,6 +14,7 @@ import { CoreModule } from 'app/core/core.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { SettingsModal } from 'app/settings/settings.modal';
 import { AddItemModal } from 'app/add-item/add-item.modal';
+import { CallToActionComponent } from 'app/call-to-action/call-to-action.component';
 
 @NgModule({
     declarations: [
@@ -25,6 +26,7 @@ import { AddItemModal } from 'app/add-item/add-item.modal';
         AddItemModal,
         UnrecognizedPage,
         HomePage,
+        CallToActionComponent,
     ],
     entryComponents: [
         SettingsModal,

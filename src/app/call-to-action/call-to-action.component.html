@@ -1,0 +1,15 @@
+<button class="fab-btn" title="הוסף" [disabled]="isHovered">
+    <mat-icon class="fab-plus">add</mat-icon>
+</button>
+<div class="fab-panel" *ngIf="isHovered">
+    <button class="fab-panel-btn"
+        matTooltip="חומרי גלם" matTooltipPosition="right"
+        [@appear-100] (click)="addBaseItem()">
+        <i class="fa fa-diamond"></i>
+    </button>
+    <button class="fab-panel-btn"
+        matTooltip="פריטים" matTooltipPosition="right"
+        [@appear] (click)="addCompositeItem()">
+        <i class="fa fa-cutlery"></i>
+    </button>
+</div>

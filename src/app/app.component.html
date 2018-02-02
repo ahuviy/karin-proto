@@ -5,16 +5,8 @@
     <kp-side-bar></kp-side-bar>
 </nav>
 <div class="call-to-action">
-    <button class="fab-btn" title="הוסף" (click)="addItemService.addMode = true">
-        <mat-icon class="fab-plus">add</mat-icon>
-    </button>
+    <kp-call-to-action></kp-call-to-action>
 </div>
 <div class="body responsive-container" [class.side-nav-shown]="showSideNav$ | async">
     <router-outlet></router-outlet>
 </div>
-<div class="add-section" *ngIf="addItemService.addMode">
-    ADD MODE
-</div>
-<kp-modal #addItemModal>
-    <kp-add-item></kp-add-item>
-</kp-modal>

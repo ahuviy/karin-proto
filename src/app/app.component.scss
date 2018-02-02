@@ -35,41 +35,9 @@
     position: fixed;
     left: 0;
     bottom: 0;
-    padding: 23px 12px 23px 15px;
     pointer-events: none;
     white-space: nowrap;
     z-index: 21;
-}
-
-.fab-btn {
-    background-color: #d23f31;
-    height: 56px;
-    position: relative;
-    width: 56px;
-    border: none;
-    border-radius: 50%;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.14), 0 4px 8px rgba(0, 0, 0, 0.28);
-    box-sizing: content-box;
-    cursor: pointer;
-    outline: none;
-    padding: 0;
-    pointer-events: auto;
-
-    &:hover {
-        box-shadow: 0 0 6px rgba(0, 0, 0, 0.16), 0 6px 12px rgba(0, 0, 0, 0.32);
-    }
-
-    .fa {
-        color: white;
-    }
-}
-
-.fab-plus {
-    color: white;
-    font-size: 33px;
-    height: 33px;
-    width: 33px;
-    vertical-align: middle;
 }
 
 .body {
