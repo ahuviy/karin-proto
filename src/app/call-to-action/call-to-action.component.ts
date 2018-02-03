@@ -1,5 +1,8 @@
 import { Component, HostListener, HostBinding } from '@angular/core';
 import { trigger, state, transition, style, animate } from '@angular/animations';
+import { MatDialog } from '@angular/material';
+
+import { AddBaseItemModal } from 'app/add-baseitem/add-baseitem.modal';
 
 @Component({
     selector: 'kp-call-to-action',
@@ -33,8 +36,23 @@ export class CallToActionComponent {
     @HostListener('mouseenter') onMouseEnter() { this.isHovered = true; }
     @HostListener('mouseleave') onMouseLeave() { this.isHovered = false; }
 
+    constructor(private dialog: MatDialog) { }
+
     addBaseItem() {
-        // TODO: open a modal
+        this.dialog.open(AddBaseItemModal, {
+            direction: 'rtl',
+            panelClass: 'kp-add-baseitem-modal-wrapper',
+            height: '300px',
+            width: '600px',
+            maxWidth: '100vw',
+            disableClose: true,
+            hasBackdrop: false,
+            closeOnNavigation: false,
+            position: {
+                bottom: '0px',
+                right: '0px',
+            },
+        });
     }
 
     addCompositeItem() {

@@ -13,7 +13,7 @@ import { UnrecognizedPage } from './unrecognized/unrecogrnized.page';
 import { CoreModule } from 'app/core/core.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { SettingsModal } from 'app/settings/settings.modal';
-import { AddItemModal } from 'app/add-item/add-item.modal';
+import { AddBaseItemModal } from 'app/add-baseitem/add-baseitem.modal';
 import { CallToActionComponent } from 'app/call-to-action/call-to-action.component';
 
 @NgModule({
@@ -23,13 +23,14 @@ import { CallToActionComponent } from 'app/call-to-action/call-to-action.compone
         SideBarLinkComponent,
         TopBarComponent,
         SettingsModal,
-        AddItemModal,
+        AddBaseItemModal,
         UnrecognizedPage,
         HomePage,
         CallToActionComponent,
     ],
     entryComponents: [
         SettingsModal,
+        AddBaseItemModal,
     ],
     imports: [
         BrowserModule,

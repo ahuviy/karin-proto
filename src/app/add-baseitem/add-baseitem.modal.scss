@@ -1,8 +1,56 @@
 @import "vars";
 
 :host {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     height: 100%;
+    overflow-y: hidden;
+}
+
+.modal-title {
+    border-bottom: 1px solid $modalSepColor;
+    box-sizing: border-box;
+    color: white;
+    font-size: 16px;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 14px;
+    text-align: right;
+    background-color: #424242;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.close {
+    cursor: pointer;
+
+    &:hover {
+        color: lightgray;
+    }
+}
+
+.modal-body {
+    box-sizing: border-box;
+    display: flex;
+    flex: 1;
+}
+
+.modal-footer {
+    box-sizing: border-box;
+    height: 35px;
+    line-height: 35px;
+    border-top: 1px solid $modalSepColor;
+    background-color: white;
+}
+
+.fa-diamond {
+    margin-left: 10px;
+}
+
+form {
+    width: 100%;
 }
 
 .inputs {
@@ -71,5 +119,7 @@ input {
 }
 
 .submit-btn {
-    background-color: greenyellow;
+    height: 100%;
+    float: left;
+    color: #3367d6;
 }

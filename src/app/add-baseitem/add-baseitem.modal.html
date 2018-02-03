@@ -1,0 +1,42 @@
+<div class="modal-title">
+    <span>
+        <i class="fa fa-diamond"></i>
+        <span>הוספת חומר גלם</span>
+    </span>
+    <mat-icon class="close" (click)="close()">close</mat-icon>
+</div>
+<form [formGroup]="addForm" (ngSubmit)="add()">
+    <div class="modal-body">
+        <div class="left-side"></div>
+        <!-- <mat-form-field>
+            <input matInput placeholder="שם" formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" placeholder="משקל ({{_baseItem.weightUnit | weightUnit}})"
+                formControlName="weight">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" placeholder="מחיר ({{currencySymbol$ | async}})"
+                formControlName="price">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="ספק" formControlName="distributorId">
+                <mat-option *ngFor="let opt of distributorOptions$ | async" [value]="opt.id">
+                    {{opt.text}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="קטגוריה" formControlName="itemCategoryId">
+                <mat-option *ngFor="let opt of itemCategoryOptions$ | async" [value]="opt.id">
+                    {{opt.text}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field> -->
+    </div>
+    <div class="modal-footer">
+        <button class="submit-btn" mat-button type="submit">
+            הוסף
+        </button>
+    </div>
+</form>

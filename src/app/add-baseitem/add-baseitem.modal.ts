@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { BaseItemsService } from 'app/core/base-items.service';
 
 @Component({
-    selector: 'kp-add-item',
-    styleUrls: ['./add-item.modal.scss'],
-    templateUrl: './add-item.modal.html',
+    selector: 'kp-add-baseitem',
+    styleUrls: ['./add-baseitem.modal.scss'],
+    templateUrl: './add-baseitem.modal.html',
 })
-export class AddItemModal {
+export class AddBaseItemModal {
     tabs = [
         { id: 'material', text: 'חומר גלם', isActive: true },
         { id: 'composite', text: 'פריט יצור', isActive: false },
@@ -28,12 +29,18 @@ export class AddItemModal {
         private BaseItemsService: BaseItemsService,
         private route: ActivatedRoute,
         private router: Router,
-    ) { window['ahuvi'] = this; }
+        private dialogRef: MatDialogRef<AddBaseItemModal>,
+        @Inject(MAT_DIALOG_DATA) private data: any,
+    ) { }
 
     add() {
         this.BaseItemsService.add(this.addForm.value).then(() => {
             this.router.navigate(['..'], { relativeTo: this.route });
         });
+    }
+
+    close() {
+        this.dialogRef.close();
     }
 
     selectTab(tab) {
