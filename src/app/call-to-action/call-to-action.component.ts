@@ -42,16 +42,6 @@ export class CallToActionComponent {
         this.dialog.open(AddBaseItemModal, {
             direction: 'rtl',
             panelClass: 'kp-add-baseitem-modal-wrapper',
-            height: '300px',
-            width: '600px',
-            maxWidth: '100vw',
-            disableClose: true,
-            hasBackdrop: false,
-            closeOnNavigation: false,
-            position: {
-                bottom: '0px',
-                right: '0px',
-            },
         });
     }
 

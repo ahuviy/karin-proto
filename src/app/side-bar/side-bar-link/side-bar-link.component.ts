@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, HostBinding } from '@angular/core';
+import { Component, Input, ViewChild, HostBinding, HostListener } from '@angular/core';
 import { RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -9,7 +9,15 @@ import { RouterLinkActive } from '@angular/router';
 export class SideBarLinkComponent {
     @Input() link;
 
+    isHovered = false;
+
     @ViewChild(RouterLinkActive) rla: RouterLinkActive;
 
-    @HostBinding('attr.active') get isActive() { return this.rla.isActive; }
+    @HostBinding('class.active') get isActive() { return this.rla.isActive; }
+
+    execLinkAction(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        this.link.addAction();
+    }
 }

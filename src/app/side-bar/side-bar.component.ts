@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
 
+import { AddBaseItemModal } from 'app/add-baseitem/add-baseitem.modal';
 import { routeLabels } from 'constants/route.consts';
 import { ItemCategoriesService } from 'app/core/item-categories.service';
 
@@ -22,6 +24,12 @@ export class SideBarComponent {
             options: {},
             text: routeLabels['/baseitems'],
             icon: 'diamond',
+            addAction: () => {
+                this.dialog.open(AddBaseItemModal, {
+                    direction: 'rtl',
+                    panelClass: 'kp-add-baseitem-modal-wrapper',
+                });
+            }
         },
         {
             url: '/compositeitems',
@@ -46,7 +54,10 @@ export class SideBarComponent {
         }))),
     );
 
-    constructor(private itemCategoriesService: ItemCategoriesService) { }
+    constructor(
+        private dialog: MatDialog,
+        private itemCategoriesService: ItemCategoriesService,
+    ) { }
 
     ngOnInit() {
         this.itemCategoriesService.refresh();

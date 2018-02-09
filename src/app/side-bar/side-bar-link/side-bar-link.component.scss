@@ -6,7 +6,7 @@
         border-radius: 2px;
     }
 
-    &[active=true] {
+    &.active {
         background-color: rgba(0, 0, 0, 0.05);
 
         span {
@@ -35,4 +35,14 @@ span {
 
 i {
     color: #616161;
+}
+
+.add-icon {
+    position: absolute;
+    left: 0;
+    color: grey;
+
+    &:hover {
+        color: #d23f31;
+    }
 }
