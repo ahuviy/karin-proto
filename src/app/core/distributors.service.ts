@@ -51,7 +51,7 @@ export class DistributorsService {
                     this._distributors$.next(newDist);
                     resolve(newDist);
                 } else {
-                    reject('could not delete distributor');
+                    reject(res.err);
                 }
             }, reject);
         });

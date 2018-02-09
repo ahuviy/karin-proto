@@ -40,9 +40,9 @@ i {
 .add-icon {
     position: absolute;
     left: 0;
-    color: grey;
+    color: rgba(0, 0, 0, 0.2);
 
     &:hover {
-        color: #d23f31;
+        color: rgba(0, 0, 0, 0.4);
     }
 }

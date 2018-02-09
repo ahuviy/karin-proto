@@ -28,7 +28,7 @@ export class BaseItemsEntryComponent {
     category$ = this.itemCategoriesService.itemCategories$.pipe(
         map(ics => {
             const category = ics.find(ic => ic.id === this.form.value.itemCategoryId);
-            return category ? category.name : 'מסות'; // TODO: temp, change this to empty string
+            return category ? category.name : '';
         }),
         shareReplay(1),
     );

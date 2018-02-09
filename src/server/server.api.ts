@@ -53,12 +53,26 @@ export const api = {
             saveDb();
             return Promise.resolve(cloneDeep(created));
         },
-        delete(id: string): Promise<{ success: boolean; }> {
+        delete(id: string): Promise<{ success: boolean; err: any; }> {
             const user = getCurrentUser();
+
+            const connectedToBaseItemIds = user.baseItems
+                .filter(bi => bi.distributorId === id)
+                .map(bi => bi.id);
+            if (connectedToBaseItemIds.length) {
+                return Promise.resolve({
+                    success: false,
+                    err: {
+                        type: 'CONNECTED_TO_BASE_ITEMS',
+                        params: { connectedToBaseItemIds }
+                    }
+                });
+            }
+
             const i = user.distributors.findIndex(d => d.id === id);
             user.distributors.splice(i, 1);
             saveDb();
-            return Promise.resolve({ success: true });
+            return Promise.resolve({ success: true, err: null });
         }
     },
 

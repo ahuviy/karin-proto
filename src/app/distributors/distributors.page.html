@@ -1,0 +1,5 @@
+<mat-accordion class="distributors-list" multi="true" displayMode="default">
+    <kp-distributor-item *ngFor="let dst of distributors$ | async"
+        [distributorItem]="dst">
+    </kp-distributor-item>
+</mat-accordion>

@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { AngularMaterialModule } from './angular-material.module';
 import { AppComponent } from './app.component';
 import { AppRouting } from './app.routing';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -15,6 +14,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { SettingsModal } from 'app/settings/settings.modal';
 import { AddBaseItemModal } from 'app/add-baseitem/add-baseitem.modal';
 import { CallToActionComponent } from 'app/call-to-action/call-to-action.component';
+import { DistributorsModule } from 'app/distributors/distributors.module';
 
 @NgModule({
     declarations: [
@@ -37,7 +37,7 @@ import { CallToActionComponent } from 'app/call-to-action/call-to-action.compone
         BrowserAnimationsModule,
         CoreModule,
         SharedModule,
-        AngularMaterialModule,
+        DistributorsModule,
         AppRouting,
     ],
     bootstrap: [AppComponent]
