@@ -1,0 +1,22 @@
+<div class="modal-title">
+    <span>
+        <i class="fa fa-truck"></i>
+        <span>הוספת ספק</span>
+    </span>
+    <mat-icon class="close" (click)="close()">close</mat-icon>
+</div>
+<form [formGroup]="form" (ngSubmit)="add()">
+    <div class="modal-body">
+        <mat-form-field>
+            <input matInput placeholder="שם" formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="טלפון" formControlName="phoneNumber">
+        </mat-form-field>
+    </div>
+    <div class="modal-footer">
+        <button class="submit-btn" mat-button type="submit">
+            הוסף
+        </button>
+    </div>
+</form>

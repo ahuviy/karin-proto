@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from 'app/shared/shared.module';
 import { DistributorsPage } from './distributors.page';
-import { DistributorItemComponent } from './distributor-item/distributor-item.component';
+import { DistributorDetailsComponent } from './distributor-details/distributor-details.component';
 
 @NgModule({
     declarations: [
         DistributorsPage,
-        DistributorItemComponent,
+        DistributorDetailsComponent,
     ],
     imports: [
         SharedModule,

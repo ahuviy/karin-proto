@@ -1,5 +1,13 @@
 <mat-accordion class="distributors-list" multi="true" displayMode="default">
-    <kp-distributor-item *ngFor="let dst of distributors$ | async"
-        [distributorItem]="dst">
-    </kp-distributor-item>
+    <mat-expansion-panel hideToggle="true" *ngFor="let dst of distributors$ | async">
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{dst.name}}</mat-panel-title>
+            <mat-panel-description>
+                <span class="item-desc">{{dst.phoneNumber}}</span>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+            <kp-distributor-details [dst]="dst"></kp-distributor-details>
+        </ng-template>
+    </mat-expansion-panel>
 </mat-accordion>

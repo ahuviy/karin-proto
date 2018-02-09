@@ -1,0 +1,18 @@
+<form [formGroup]="form" (ngSubmit)="update()">
+    <mat-form-field>
+        <input matInput placeholder="שם" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="טלפון" formControlName="phoneNumber">
+    </mat-form-field>
+    <mat-action-row>
+        <button class="delete-btn" type="button" mat-button
+            (click)="delete()">
+            מחק
+        </button>
+        <button class="save-btn" type="submit" mat-button
+            [disabled]="form.pristine || form.invalid">
+            שמור
+        </button>
+    </mat-action-row>
+</form>

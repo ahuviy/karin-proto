@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 
 import { AddBaseItemModal } from 'app/add-baseitem/add-baseitem.modal';
+import { AddDistributorModal } from 'app/add-distributor/add-distributor.modal';
 import { routeLabels } from 'constants/route.consts';
 import { ItemCategoriesService } from 'app/core/item-categories.service';
 
@@ -42,6 +43,12 @@ export class SideBarComponent {
             options: {},
             text: routeLabels['/distributors'],
             icon: 'truck',
+            addAction: () => {
+                this.dialog.open(AddDistributorModal, {
+                    direction: 'rtl',
+                    panelClass: 'kp-add-baseitem-modal-wrapper',
+                });
+            }
         },
     ];
     categories$ = this.itemCategoriesService.itemCategories$.pipe(

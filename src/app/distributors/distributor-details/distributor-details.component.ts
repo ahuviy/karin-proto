@@ -7,12 +7,14 @@ import { DistributorsService } from 'app/core/distributors.service';
 import { Distributor } from 'server/server.interface';
 
 @Component({
-    selector: 'kp-distributor-item',
-    styleUrls: ['./distributor-item.component.scss'],
-    templateUrl: './distributor-item.component.html'
+    selector: 'kp-distributor-details',
+    styleUrls: ['./distributor-details.component.scss'],
+    templateUrl: './distributor-details.component.html'
 })
-export class DistributorItemComponent {
-    @Input() distributorItem: Distributor;
+export class DistributorDetailsComponent {
+    @Input() set dst(val: Distributor) {
+        this.form = this.fb.group(val);
+    }
 
     form: FormGroup;
 
@@ -21,12 +23,6 @@ export class DistributorItemComponent {
         private distributorsService: DistributorsService,
         private fb: FormBuilder,
     ) { }
-
-    ngOnChanges(changes: SimpleChanges) {
-        if ('distributorItem' in changes) {
-            this.form = this.fb.group(changes.distributorItem.currentValue);
-        }
-    }
 
     update() {
         this.distributorsService.update(this.form.value).then(res => {

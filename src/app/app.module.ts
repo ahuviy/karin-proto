@@ -13,6 +13,7 @@ import { CoreModule } from 'app/core/core.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { SettingsModal } from 'app/settings/settings.modal';
 import { AddBaseItemModal } from 'app/add-baseitem/add-baseitem.modal';
+import { AddDistributorModal } from 'app/add-distributor/add-distributor.modal';
 import { CallToActionComponent } from 'app/call-to-action/call-to-action.component';
 import { DistributorsModule } from 'app/distributors/distributors.module';
 
@@ -24,6 +25,7 @@ import { DistributorsModule } from 'app/distributors/distributors.module';
         TopBarComponent,
         SettingsModal,
         AddBaseItemModal,
+        AddDistributorModal,
         UnrecognizedPage,
         HomePage,
         CallToActionComponent,
@@ -31,6 +33,7 @@ import { DistributorsModule } from 'app/distributors/distributors.module';
     entryComponents: [
         SettingsModal,
         AddBaseItemModal,
+        AddDistributorModal,
     ],
     imports: [
         BrowserModule,
