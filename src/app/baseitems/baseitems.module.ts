@@ -17,8 +17,5 @@ import { BaseItemsEntryComponent } from './baseitems-entry/baseitems-entry.compo
         AngularMaterialModule,
         BaseItemsRouting,
     ],
-    providers: [
-        BaseItemsService,
-    ],
 })
 export class BaseCompositeItemsModule { }

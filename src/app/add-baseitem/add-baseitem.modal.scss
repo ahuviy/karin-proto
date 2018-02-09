@@ -13,8 +13,8 @@
     box-sizing: border-box;
     color: white;
     font-size: 16px;
-    height: 35px;
-    line-height: 35px;
+    height: 49px;
+    line-height: 49px;
     padding: 0 14px;
     text-align: right;
     background-color: #424242;
@@ -39,8 +39,9 @@
 
 .modal-footer {
     box-sizing: border-box;
-    height: 35px;
-    line-height: 35px;
+    padding: 6px;
+    display: flex;
+    justify-content: flex-end;
     border-top: 1px solid $modalSepColor;
     background-color: white;
 }
@@ -122,4 +123,16 @@ input {
     height: 100%;
     float: left;
     color: #3367d6;
+}
+
+.mat-form-field {
+    display: block;
+}
+
+.left-side {
+    padding: 20px;
+}
+
+.right-side {
+    padding: 20px;
 }

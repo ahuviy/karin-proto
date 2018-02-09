@@ -5,34 +5,42 @@
     </span>
     <mat-icon class="close" (click)="close()">close</mat-icon>
 </div>
-<form [formGroup]="addForm" (ngSubmit)="add()">
+<form [formGroup]="form" (ngSubmit)="add()">
     <div class="modal-body">
-        <div class="left-side"></div>
-        <!-- <mat-form-field>
-            <input matInput placeholder="שם" formControlName="name">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput type="number" placeholder="משקל ({{_baseItem.weightUnit | weightUnit}})"
-                formControlName="weight">
-        </mat-form-field>
-        <mat-form-field>
-            <input matInput type="number" placeholder="מחיר ({{currencySymbol$ | async}})"
-                formControlName="price">
-        </mat-form-field>
-        <mat-form-field>
-            <mat-select placeholder="ספק" formControlName="distributorId">
-                <mat-option *ngFor="let opt of distributorOptions$ | async" [value]="opt.id">
-                    {{opt.text}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-select placeholder="קטגוריה" formControlName="itemCategoryId">
-                <mat-option *ngFor="let opt of itemCategoryOptions$ | async" [value]="opt.id">
-                    {{opt.text}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field> -->
+        <div class="right-side">
+            <mat-form-field>
+                <input matInput placeholder="שם" formControlName="name">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" placeholder="משקל" formControlName="weight">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="יחידת משקל" formControlName="weightUnit">
+                    <mat-option value="gram">גרם</mat-option>
+                    <mat-option value="kilogram">ק״ג</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="left-side">
+            <mat-form-field>
+                <input matInput type="number" placeholder="מחיר ({{currencySymbol$ | async}})"
+                    formControlName="price">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="ספק" formControlName="distributorId">
+                    <mat-option *ngFor="let opt of distributorOptions$ | async" [value]="opt.id">
+                        {{opt.text}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="קטגוריה" formControlName="itemCategoryId">
+                    <mat-option *ngFor="let opt of itemCategoryOptions$ | async" [value]="opt.id">
+                        {{opt.text}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
     </div>
     <div class="modal-footer">
         <button class="submit-btn" mat-button type="submit">

@@ -1,9 +1,12 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { map } from 'rxjs/operators';
 
 import { BaseItemsService } from 'app/core/base-items.service';
+import { SettingsService } from 'app/core/settings.service';
+import { DistributorsService } from 'app/core/distributors.service';
+import { ItemCategoriesService } from 'app/core/item-categories.service';
 
 @Component({
     selector: 'kp-add-baseitem',
@@ -11,69 +14,55 @@ import { BaseItemsService } from 'app/core/base-items.service';
     templateUrl: './add-baseitem.modal.html',
 })
 export class AddBaseItemModal {
-    tabs = [
-        { id: 'material', text: 'חומר גלם', isActive: true },
-        { id: 'composite', text: 'פריט יצור', isActive: false },
-    ];
-    addForm: FormGroup = this.initForm('material');
-    formCfg = [
-        { label: 'שם', ctrlKey: 'name', inputType: 'text' },
-        { label: 'ספק', ctrlKey: 'distributorName', inputType: 'text' },
-        { label: 'משקל', ctrlKey: 'weight', inputType: 'number' },
-        { label: 'יח׳ משקל', ctrlKey: 'weightUnit', inputType: 'text' },
-        { label: 'מחיר בש״ח', ctrlKey: 'price', inputType: 'number' },
-    ];
+    itemCategoryOptions$ = this.itemCategoriesService.itemCategories$.pipe(
+        map(ics => {
+            const nullCategory = { id: undefined, text: '' };
+            const options = ics
+                ? [nullCategory].concat(ics.map(ic => ({ id: ic.id, text: ic.name })))
+                : [nullCategory];
+            return options;
+        })
+    );
+
+    currencySymbol$ = this.settingsService.settings$.pipe(
+        map(s => s.currency.symbol)
+    );
+
+    distributorOptions$ = this.distributorsService.distributors$.pipe(
+        map(ds => ds ? ds.map(d => ({ id: d.id, text: d.name })) : [])
+    );
+
+    form: FormGroup = this.fb.group({
+        distributorId: [null, Validators.required],
+        name: [null, Validators.required],
+        weight: [null, Validators.required],
+        weightUnit: 'gram',
+        price: [null, Validators.required],
+        itemCategoryId: null,
+    });
 
     constructor(
         private fb: FormBuilder,
-        private BaseItemsService: BaseItemsService,
-        private route: ActivatedRoute,
-        private router: Router,
+        private baseItemsService: BaseItemsService,
+        private distributorsService: DistributorsService,
+        private itemCategoriesService: ItemCategoriesService,
+        private settingsService: SettingsService,
         private dialogRef: MatDialogRef<AddBaseItemModal>,
         @Inject(MAT_DIALOG_DATA) private data: any,
     ) { }
-
-    add() {
-        this.BaseItemsService.add(this.addForm.value).then(() => {
-            this.router.navigate(['..'], { relativeTo: this.route });
-        });
-    }
 
     close() {
         this.dialogRef.close();
     }
 
-    selectTab(tab) {
-        this.tabs.forEach(t => t.isActive = (tab.id === t.id));
-        this.addForm = this.initForm(tab.id);
-    }
-
-    initForm(type) {
-        switch (type) {
-            case 'material':
-                return this.initMaterialForm();
-            case 'composite':
-                return this.initCompositeForm();
+    add() {
+        if (this.form.invalid) {
+            return;
         }
-    }
-
-    private initMaterialForm() {
-        return this.fb.group({
-            name: [null, Validators.required],
-            distributorName: [null, Validators.required],
-            weight: [null, Validators.required],
-            weightUnit: [null, Validators.required],
-            price: [null, Validators.required],
-        });
-    }
-
-    private initCompositeForm() {
-        return this.fb.group({
-            name: [null, Validators.required],
-            distributorName: [null, Validators.required],
-            weight: [null, Validators.required],
-            weightUnit: [null, Validators.required],
-            price: [null, Validators.required],
+        this.baseItemsService.add(this.form.value).then(res => {
+            this.dialogRef.close('success');
+        }, err => {
+            console.log('failure:', err);
         });
     }
 }
