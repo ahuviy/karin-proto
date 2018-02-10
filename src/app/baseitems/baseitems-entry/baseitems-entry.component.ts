@@ -79,7 +79,21 @@ export class BaseItemsEntryComponent {
         });
         dialogRef.afterClosed().subscribe(confirmed => {
             if (!confirmed) return;
-            this.baseItemsService.delete(this.form.value.id);
+            this.baseItemsService.delete(this.form.value.id).then(res => {
+                console.log('success:', res);
+            }, err => {
+                console.log('failed:', err);
+                if (err.type === 'USED_BY_COMPOSITE_ITEMS') {
+                    this.dialog.open(AlertDialog, {
+                        direction: 'rtl',
+                        data: {
+                            title: 'הפעולה נכשלה',
+                            message: `בחומר הגלם הזה משתמשים ${err.params.usedByCompositeItemIds.length} פריטים. נא למחוק אותם לפני שניתן למחוק את חומר הגלם.`,
+                            confirmBtn: 'אישור',
+                        },
+                    });
+                }
+            });
         });
     }
 }

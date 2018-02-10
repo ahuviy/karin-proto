@@ -1,20 +1,27 @@
 <form [formGroup]="form" (ngSubmit)="update()">
-    <mat-form-field>
-        <input matInput placeholder="שם" formControlName="name">
-    </mat-form-field>
-    <mat-form-field>
-        <input matInput type="number" placeholder="שעות עבודה" formControlName="hoursOfWork">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-select placeholder="קטגוריה" formControlName="itemCategoryId">
-            <mat-option *ngFor="let opt of itemCategoryOptions$ | async" [value]="opt.id">
-                {{opt.text}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+    <div style="display:flex;justify-content:space-between;">
+        <mat-form-field>
+            <input matInput placeholder="שם" formControlName="name">
+        </mat-form-field>
+        <mat-form-field class="with-padding">
+            <input matInput type="number" placeholder="שעות עבודה" formControlName="hoursOfWork">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="קטגוריה" formControlName="itemCategoryId">
+                <mat-option *ngFor="let opt of itemCategoryOptions$ | async" [value]="opt.id">
+                    {{opt.text}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
     <div class="ingredients-title">רכיבים</div>
-    <div *ngFor="let ing of form.get('ingredients').controls">
-        <kp-ingredient [ingCtrl]="ing"></kp-ingredient>
+    <div *ngFor="let ing of form.get('ingredients').controls; index as i">
+        <kp-ingredient
+            [ingCtrl]="ing"
+            (delete)="remIngredient(i)">
+        </kp-ingredient>
+        <!-- TODO: make a real add-ingredient btn -->
+        <mat-icon>add</mat-icon>
     </div>
     <mat-action-row>
         <button class="delete-btn" type="button" mat-button

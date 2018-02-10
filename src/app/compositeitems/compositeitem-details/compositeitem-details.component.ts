@@ -1,5 +1,5 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { map } from 'rxjs/operators';
 
@@ -71,5 +71,10 @@ export class CompositeItemDetailsComponent {
                 console.log('failed:', err);
             });
         });
+    }
+
+    remIngredient(i: number) {
+        const ingredients = this.form.get('ingredients') as FormArray;
+        ingredients.removeAt(i);
     }
 }

@@ -1,2 +1,12 @@
-<span>{{(ingredient.baseItemId | idToBaseItem).name}}</span>
-<span>{{ingredient.amount}}</span>
+<div class="ing-description">
+    <span *ngIf="!editMode">{{ingredient.amount}}</span>
+    <input #amountInput class="amount-input" type="number" *ngIf="editMode"
+        [formControl]="ingCtrl.get('amount')">
+    <span>יח׳ -</span>
+    <span>{{(baseItem$ | async).name}}</span>
+    <span>({{(baseItem$ | async).weight}} {{(baseItem$ | async).weightUnit | weightUnit}})</span>
+</div>
+<div class="actions">
+    <mat-icon class="action-btn ing-edit" (click)="toggleEdit()">edit</mat-icon>
+    <mat-icon class="action-btn ing-remove" (click)="delete.emit()">remove</mat-icon>
+</div>

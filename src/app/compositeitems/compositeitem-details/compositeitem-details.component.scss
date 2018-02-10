@@ -11,7 +11,11 @@
 }
 
 .mat-form-field {
-    display: block;
+    min-width: 0;
+    
+    &.with-padding {
+        padding: 0 10px;
+    }
 }
 
 .ingredients-title {
