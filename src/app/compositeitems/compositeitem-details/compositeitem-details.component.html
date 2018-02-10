@@ -1,0 +1,29 @@
+<form [formGroup]="form" (ngSubmit)="update()">
+    <mat-form-field>
+        <input matInput placeholder="שם" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput type="number" placeholder="שעות עבודה" formControlName="hoursOfWork">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="קטגוריה" formControlName="itemCategoryId">
+            <mat-option *ngFor="let opt of itemCategoryOptions$ | async" [value]="opt.id">
+                {{opt.text}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="ingredients-title">רכיבים</div>
+    <div *ngFor="let ing of form.get('ingredients').controls">
+        <kp-ingredient [ingCtrl]="ing"></kp-ingredient>
+    </div>
+    <mat-action-row>
+        <button class="delete-btn" type="button" mat-button
+            (click)="delete()">
+            מחק
+        </button>
+        <button class="save-btn" type="submit" mat-button
+            [disabled]="form.pristine || form.invalid">
+            שמור
+        </button>
+    </mat-action-row>
+</form>

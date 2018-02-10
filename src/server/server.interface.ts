@@ -28,6 +28,7 @@ export interface Settings {
 }
 
 export interface Distributor {
+    // TODO: add daysToDeliver
     id: string;
     name: string;
     phoneNumber: string;
@@ -45,6 +46,7 @@ export interface BaseItem {
 
 export interface CompositeItem {
     id: string;
+    name: string;
     hoursOfWork: number;
     ingredients: {
         baseItemId: string;

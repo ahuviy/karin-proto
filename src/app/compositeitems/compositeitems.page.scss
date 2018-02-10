@@ -1,4 +1,8 @@
 :host {
     display: block;
-    padding: 20px;
+    padding-top: 30px;
+}
+
+.mat-expansion-panel-header-description {
+    justify-content: flex-end;
 }

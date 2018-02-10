@@ -47,6 +47,7 @@ export interface BaseItem {
 
 export interface CompositeItem {
     id: string;
+    name: string;
     hoursOfWork: number;
     ingredients: {
         baseItemId: string;

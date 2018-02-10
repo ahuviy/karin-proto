@@ -11,6 +11,7 @@ import { HomePage } from './home/home.page';
 import { UnrecognizedPage } from './unrecognized/unrecogrnized.page';
 import { CoreModule } from 'app/core/core.module';
 import { SharedModule } from 'app/shared/shared.module';
+import { CompositeItemsModule } from 'app/compositeitems/compositeitems.module';
 import { SettingsModal } from 'app/settings/settings.modal';
 import { AddBaseItemModal } from 'app/add-baseitem/add-baseitem.modal';
 import { AddDistributorModal } from 'app/add-distributor/add-distributor.modal';
@@ -41,6 +42,7 @@ import { DistributorsModule } from 'app/distributors/distributors.module';
         CoreModule,
         SharedModule,
         DistributorsModule,
+        CompositeItemsModule,
         AppRouting,
     ],
     bootstrap: [AppComponent]

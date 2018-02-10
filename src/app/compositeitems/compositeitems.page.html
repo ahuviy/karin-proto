@@ -1,0 +1,13 @@
+<mat-accordion class="compositeitems-list" multi="true" displayMode="default">
+    <mat-expansion-panel hideToggle="true" *ngFor="let compItem of compositeItems$ | async">
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{compItem.name}}</mat-panel-title>
+            <mat-panel-description>
+                <span class="item-desc">{{(compItem.itemCategoryId | idToItemCategory).name}}</span>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+            <kp-compositeitem-details [compItem]="compItem"></kp-compositeitem-details>
+        </ng-template>
+    </mat-expansion-panel>
+</mat-accordion>

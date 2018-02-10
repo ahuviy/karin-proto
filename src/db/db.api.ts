@@ -46,9 +46,9 @@ function getInitialDb(): Db {
         compositeItems: [],
     };
     user.distributors = initDistributors();
+    user.itemCategories = initItemCategories();
     user.baseItems = initBaseItems();
     user.compositeItems = initCompositeItems();
-    user.itemCategories = initItemCategories();
 
     return { users: [user] };
 
@@ -75,7 +75,20 @@ function getInitialDb(): Db {
     }
 
     function initCompositeItems(): CompositeItem[] {
-        return [];
+        return [
+            {
+                id: getId(),
+                name: 'עוגת ביסקוויט',
+                hoursOfWork: 5,
+                ingredients: [
+                    {
+                        baseItemId: user.baseItems[0].id,
+                        amount: 4,
+                    }
+                ],
+                itemCategoryId: user.itemCategories[1].id,
+            }
+        ];
     }
 
     function initItemCategories(): ItemCategory[] {

@@ -4,11 +4,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomePage } from './home/home.page';
 import { UnrecognizedPage } from './unrecognized/unrecogrnized.page';
 import { DistributorsPage } from './distributors/distributors.page';
+import { CompositeItemsPage } from './compositeitems/compositeitems.page';
 
 const routes: Routes = [
     { path: '', pathMatch: 'full', component: HomePage },
     { path: 'baseitems', loadChildren: 'app/baseitems/baseitems.module#BaseCompositeItemsModule' },
-    { path: 'compositeitems', loadChildren: 'app/compositeitems/compositeitems.module#CompositeItemsModule' },
+    { path: 'compositeitems', component: CompositeItemsPage },
     { path: 'distributors', component: DistributorsPage },
     { path: 'category/:categoryId', loadChildren: 'app/categories/categories.module#CategoriesModule' },
     { path: 'unrecognized', component: UnrecognizedPage },
