@@ -37,6 +37,10 @@ export class SideBarComponent {
             options: {},
             text: routeLabels['/compositeitems'],
             icon: 'cutlery',
+            addAction: () => {
+                // TODO: open an add-composite-item modal
+                console.log('todo');
+            }
         },
         {
             url: '/distributors',
