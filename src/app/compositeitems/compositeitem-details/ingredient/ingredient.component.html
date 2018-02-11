@@ -1,10 +1,21 @@
-<div class="ing-description">
-    <span *ngIf="!editMode">{{ingredient.amount}}</span>
-    <input #amountInput class="amount-input" type="number" *ngIf="editMode"
-        [formControl]="ingCtrl.get('amount')">
-    <span>יח׳ -</span>
-    <span>{{(baseItem$ | async).name}}</span>
-    <span>({{(baseItem$ | async).weight}} {{(baseItem$ | async).weightUnit | weightUnit}})</span>
+<div class="ing-description" [formGroup]="ingCtrl">
+    <ng-container *ngIf="editMode">
+        <input #amountInput class="amount-input" type="number" *ngIf="editMode"
+            formControlName="amount">
+        <span>יח׳ -</span>
+        <mat-form-field>
+            <mat-select placeholder="מרכיב" formControlName="baseItemId">
+                <mat-option *ngFor="let opt of baseItemOptions$ | async" [value]="opt.id">
+                    {{opt.text}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </ng-container>
+    <ng-container *ngIf="!editMode">
+        <span>{{amount}}</span>
+        <span>יח׳ -</span>
+        <span>{{baseItemDescription}}</span>
+    </ng-container>
 </div>
 <div class="actions">
     <mat-icon class="action-btn ing-edit" (click)="toggleEdit()">edit</mat-icon>

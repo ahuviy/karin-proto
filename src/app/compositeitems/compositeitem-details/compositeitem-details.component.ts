@@ -1,5 +1,5 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
-import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
+import { FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { map } from 'rxjs/operators';
 
@@ -22,7 +22,8 @@ export class CompositeItemDetailsComponent {
             itemCategoryId: val.itemCategoryId,
             ingredients: this.fb.array(val.ingredients.map(i => this.fb.group({
                 baseItemId: i.baseItemId,
-                amount: i.amount
+                amount: i.amount,
+                editMode: false,
             })))
         });
     }
@@ -76,5 +77,14 @@ export class CompositeItemDetailsComponent {
     remIngredient(i: number) {
         const ingredients = this.form.get('ingredients') as FormArray;
         ingredients.removeAt(i);
+    }
+
+    addIngredient() {
+        const ingredients = this.form.get('ingredients') as FormArray;
+        ingredients.push(this.fb.group({
+            baseItemId: [null, Validators.required],
+            amount: [null, Validators.required],
+            editMode: true,
+        }));
     }
 }

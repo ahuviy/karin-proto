@@ -12,7 +12,7 @@
 
 .mat-form-field {
     min-width: 0;
-    
+
     &.with-padding {
         padding: 0 10px;
     }
@@ -20,4 +20,14 @@
 
 .ingredients-title {
     font-weight: 800;
+}
+
+.add-ingredient-btn {
+    cursor: pointer;
+    border-radius: 50%;
+    user-select: none;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
 }

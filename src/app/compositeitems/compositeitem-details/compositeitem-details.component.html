@@ -20,9 +20,8 @@
             [ingCtrl]="ing"
             (delete)="remIngredient(i)">
         </kp-ingredient>
-        <!-- TODO: make a real add-ingredient btn -->
-        <mat-icon>add</mat-icon>
     </div>
+    <mat-icon class="add-ingredient-btn" (click)="addIngredient()">add</mat-icon>
     <mat-action-row>
         <button class="delete-btn" type="button" mat-button
             (click)="delete()">

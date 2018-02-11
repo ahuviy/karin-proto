@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { startWith, map, shareReplay } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { BaseItemsService } from 'app/core/base-items.service';
 import { BaseItem } from 'server/server.interface';
+import { weightUnitMap } from 'constants/weight.consts';
 
 @Component({
     selector: 'kp-ingredient',
@@ -18,32 +18,38 @@ export class IngredientComponent {
 
     @ViewChild('amountInput') amountInput: ElementRef;
 
-    baseItem$: Observable<BaseItem>;
-    editMode = false;
+    baseItemOptions$ = this.baseItemsService.baseItems$.pipe(
+        map(bis => {
+            return bis.map(bi => ({
+                id: bi.id,
+                text: `${bi.name} (${bi.weight} ${weightUnitMap[bi.weightUnit]})`
+            }));
+        }),
+    );
 
     constructor(private baseItemsService: BaseItemsService) { }
 
-    ngOnInit() {
-        this.baseItem$ = this.ingCtrl.valueChanges.pipe(
-            startWith(this.ingCtrl.value),
-            map(ing => {
-                if (ing.baseItemId) {
-                    return this.baseItemsService.baseItems.find(bi => bi.id === ing.baseItemId);
-                } else {
-                    throw 'oops, this shouldnt happen';
-                }
-            }),
-            shareReplay(1),
-        );
+    get amount() {
+        return this.ingCtrl.value.amount;
     }
 
-    get ingredient() {
-        return this.ingCtrl.value;
+    get editMode() {
+        return this.ingCtrl.value.editMode;
+    }
+
+    get baseItemDescription() {
+        if (this.ingCtrl.value.baseItemId) {
+            const baseItem = this.baseItemsService.baseItems.find(bi => bi.id === this.ingCtrl.value.baseItemId);
+            return `${baseItem.name} (${baseItem.weight} ${weightUnitMap[baseItem.weightUnit]})`;
+        } else {
+            return '';
+        }
     }
 
     toggleEdit() {
-        this.editMode = !this.editMode;
-        if (this.editMode) {
+        const editModeCtrl = this.ingCtrl.get('editMode');
+        editModeCtrl.setValue(!editModeCtrl.value);
+        if (editModeCtrl.value) {
             setTimeout(() => this.amountInput.nativeElement.focus(), 0);
         }
     }
