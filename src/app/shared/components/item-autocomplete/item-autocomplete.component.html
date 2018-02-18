@@ -1,0 +1,8 @@
+<mat-form-field>
+    <input type="text" matInput [formControl]="search" [matAutocomplete]="auto">
+</mat-form-field>
+<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" autoActiveFirstOption>
+    <mat-option *ngFor="let opt of (filteredOptions$ | async)" [value]="opt">
+        {{opt.item.name}} ({{opt.type === 'baseItem' ? 'חומר גלם' : 'פריט'}})
+    </mat-option>
+</mat-autocomplete>

@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 
 import { AddBaseItemModal } from 'app/add-baseitem/add-baseitem.modal';
+import { AddCompositeItemModal } from 'app/add-composite-item/add-composite-item.modal';
 import { AddDistributorModal } from 'app/add-distributor/add-distributor.modal';
 import { routeLabels } from 'constants/route.consts';
 import { ItemCategoriesService } from 'app/core/item-categories.service';
@@ -38,8 +39,10 @@ export class SideBarComponent {
             text: routeLabels['/compositeitems'],
             icon: 'cutlery',
             addAction: () => {
-                // TODO: open an add-composite-item modal
-                console.log('todo');
+                this.dialog.open(AddCompositeItemModal, {
+                    direction: 'rtl',
+                    panelClass: 'kp-add-baseitem-modal-wrapper',
+                });
             }
         },
         {

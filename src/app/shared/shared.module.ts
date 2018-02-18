@@ -9,6 +9,7 @@ import { WeightUnitPipe } from './pipes/weight-unit.pipe';
 import { IdToItemCategoryPipe } from './pipes/id-to-item-category.pipe';
 import { IdToBaseItemPipe } from './pipes/id-to-baseitem.pipe';
 import { AlertDialog } from './components/alert/alert.dialog';
+import { ItemAutocompleteComponent } from './components/item-autocomplete/item-autocomplete.component';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import { AlertDialog } from './components/alert/alert.dialog';
         WeightUnitPipe,
         IdToItemCategoryPipe,
         IdToBaseItemPipe,
+        ItemAutocompleteComponent,
         AlertDialog,
     ],
     entryComponents: [
@@ -38,6 +40,7 @@ import { AlertDialog } from './components/alert/alert.dialog';
         WeightUnitPipe,
         IdToItemCategoryPipe,
         IdToBaseItemPipe,
+        ItemAutocompleteComponent,
         AlertDialog,
     ],
 })

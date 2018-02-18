@@ -14,6 +14,7 @@ import { SharedModule } from 'app/shared/shared.module';
 import { CompositeItemsModule } from 'app/compositeitems/compositeitems.module';
 import { SettingsModal } from 'app/settings/settings.modal';
 import { AddBaseItemModal } from 'app/add-baseitem/add-baseitem.modal';
+import { AddCompositeItemModal } from 'app/add-composite-item/add-composite-item.modal';
 import { AddDistributorModal } from 'app/add-distributor/add-distributor.modal';
 import { CallToActionComponent } from 'app/call-to-action/call-to-action.component';
 import { DistributorsModule } from 'app/distributors/distributors.module';
@@ -26,6 +27,7 @@ import { DistributorsModule } from 'app/distributors/distributors.module';
         TopBarComponent,
         SettingsModal,
         AddBaseItemModal,
+        AddCompositeItemModal,
         AddDistributorModal,
         UnrecognizedPage,
         HomePage,
@@ -34,6 +36,7 @@ import { DistributorsModule } from 'app/distributors/distributors.module';
     entryComponents: [
         SettingsModal,
         AddBaseItemModal,
+        AddCompositeItemModal,
         AddDistributorModal,
     ],
     imports: [

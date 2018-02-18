@@ -1,0 +1,32 @@
+<div class="modal-title">
+    <span>
+        <i class="fa fa-diamond"></i>
+        <span>הוספת פריט</span>
+    </span>
+    <mat-icon class="close" (click)="close()">close</mat-icon>
+</div>
+<form [formGroup]="form" (ngSubmit)="add()">
+    <div class="modal-body">
+        <mat-form-field>
+            <input matInput placeholder="שם" formControlName="name">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" placeholder="שעות עבודה" formControlName="hoursOfWork">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="קטגוריה" formControlName="itemCategoryId">
+                <mat-option *ngFor="let opt of itemCategoryOptions$ | async" [value]="opt.id">
+                    {{opt.text}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div>
+            <kp-item-autocomplete (selected)="onItemSelected($event)"></kp-item-autocomplete>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="submit-btn" mat-button type="submit">
+            הוסף
+        </button>
+    </div>
+</form>

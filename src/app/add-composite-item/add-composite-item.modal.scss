@@ -1,0 +1,137 @@
+@import "vars";
+
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.modal-title {
+    border-bottom: 1px solid $modalSepColor;
+    box-sizing: border-box;
+    color: white;
+    font-size: 16px;
+    height: 49px;
+    line-height: 49px;
+    padding: 0 14px;
+    text-align: right;
+    background-color: #424242;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.close {
+    cursor: pointer;
+
+    &:hover {
+        color: lightgray;
+    }
+}
+
+.modal-body {
+    box-sizing: border-box;
+    flex: 1;
+}
+
+.modal-footer {
+    box-sizing: border-box;
+    padding: 6px;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid $modalSepColor;
+    background-color: white;
+}
+
+.fa-diamond {
+    margin-left: 10px;
+}
+
+form {
+    width: 100%;
+}
+
+.inputs {
+    padding: 24px;
+    flex: 1;
+}
+
+.tabslist {
+    border-left: 1px solid $modalSepColor;
+    height: 100%;
+    width: 168px;
+}
+
+.tab {
+    color: #616161;
+    cursor: pointer;
+    display: block;
+    padding-right: 24px;
+    font-size: 14px;
+    line-height: 36px;
+    flex: 1;
+
+    &:focus,
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.03);
+    }
+
+    &.active {
+        color: #212121;
+        cursor: default;
+        font-weight: bold;
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+}
+
+.tabpanel {
+    width: 432px;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    line-height: 34px;
+    margin-bottom: 16px;
+}
+
+.input-label {
+    width: 80px;
+    display: inline-block;
+}
+
+input {
+    flex: 1;
+}
+
+.tabbtn {
+    line-height: 48px;
+    max-height: 48px;
+    min-height: 48px;
+    padding-left: 24px;
+    text-align: left;
+}
+
+.submit-btn {
+    height: 100%;
+    float: left;
+    color: #3367d6;
+}
+
+.mat-form-field {
+    margin: 10px;
+}
+
+.left-side {
+    padding: 20px;
+}
+
+.right-side {
+    padding: 20px;
+}
