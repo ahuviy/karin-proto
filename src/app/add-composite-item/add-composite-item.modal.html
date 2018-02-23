@@ -20,8 +20,17 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
-        <div>
+        <div class="searchbar-wrapper">
             <kp-item-autocomplete (selected)="onItemSelected($event)"></kp-item-autocomplete>
+        </div>
+        <div *ngFor="let ingr of form.get('ingredients').controls; index as i" [formGroup]="ingr">
+            <span>{{ingredients[i].label}}</span>
+            <mat-form-field>
+                <input matInput type="number" placeholder="יחידות" formControlName="amount">
+            </mat-form-field>
+            <button class="remove-ingr" mat-icon-button (click)="removeIngredient(i)">
+                <mat-icon>delete</mat-icon>
+            </button>
         </div>
     </div>
     <div class="modal-footer">

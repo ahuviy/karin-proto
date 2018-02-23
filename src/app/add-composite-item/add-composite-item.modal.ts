@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormArray, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { map, startWith } from 'rxjs/operators';
 import { combineLatest } from 'rxjs/observable/combineLatest';
@@ -11,6 +11,7 @@ import { SettingsService } from 'app/core/settings.service';
 import { DistributorsService } from 'app/core/distributors.service';
 import { ItemCategoriesService } from 'app/core/item-categories.service';
 import { BaseItem, CompositeItem } from 'server/server.interface';
+import { weightUnitMap } from 'constants/weight.consts';
 import { ItemAutocompleteOption } from 'app/shared/components/item-autocomplete/item-autocomplete.component';
 
 @Component({
@@ -40,9 +41,11 @@ export class AddCompositeItemModal {
     form: FormGroup = this.fb.group({
         name: [null, Validators.required],
         hoursOfWork: [null, Validators.required],
-        ingredients: null,
+        ingredients: this.fb.array([]),
         itemCategoryId: null,
     });
+
+    ingredients = [];
 
     constructor(
         private fb: FormBuilder,
@@ -55,8 +58,13 @@ export class AddCompositeItemModal {
         @Inject(MAT_DIALOG_DATA) private data: any,
     ) { }
 
-    onItemSelected(item: ItemAutocompleteOption) {
-        console.log('selected item:', item);
+    onItemSelected(opt: ItemAutocompleteOption) {
+        (this.form.get('ingredients') as FormArray).push(this.fb.group({
+            baseItemId: (opt.type === 'baseItem') ? opt.item.id : null,
+            compositeItemId: (opt.type === 'compositeItem') ? opt.item.id : null,
+            amount: [null, Validators.required],
+        }));
+        this.ingredients.push({ label: this.getIngredientLabel(opt) });
     }
 
     close() {
@@ -67,10 +75,27 @@ export class AddCompositeItemModal {
         if (this.form.invalid) {
             return;
         }
-        this.baseItemsService.add(this.form.value).then(res => {
+        this.compositeItemsService.add(this.form.value).then(res => {
             this.dialogRef.close('success');
         }, err => {
             console.log('failure:', err);
         });
+    }
+
+    removeIngredient(index: number) {
+        (this.form.get('ingredients') as FormArray).removeAt(index);
+        this.ingredients.splice(index, 1);
+    }
+
+    private getIngredientLabel(opt: ItemAutocompleteOption): string {
+        if (opt.type === 'baseItem') {
+            const baseItem = this.baseItemsService.baseItems
+                .find(bi => bi.id === opt.item.id);
+            return `${baseItem.name} (${baseItem.weight} ${weightUnitMap[baseItem.weightUnit]})`;
+        } else {
+            const compositeItem = this.compositeItemsService.compositeItems
+                .find(ci => ci.id === opt.item.id);
+            return compositeItem.name;
+        }
     }
 }

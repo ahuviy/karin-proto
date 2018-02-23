@@ -1,5 +1,6 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatInput } from '@angular/material';
 import { map, startWith } from 'rxjs/operators';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { Observable } from 'rxjs/Observable';
@@ -62,6 +63,7 @@ export class ItemAutocompleteComponent {
     constructor(
         private baseItemsService: BaseItemsService,
         private compositeItemsService: CompositeItemsService,
+        private el: ElementRef,
     ) { }
 
     ngOnInit() {
@@ -69,7 +71,11 @@ export class ItemAutocompleteComponent {
         this.compositeItemsService.refresh();
         this.search.valueChanges.subscribe(s => {
             if (typeof s !== 'string') {
-                this.selected.emit(s);
+                setTimeout(() => {
+                    this.el.nativeElement.querySelector('input').blur();
+                    this.search.setValue('');
+                    this.selected.emit(s);
+                });
             }
         });
     }

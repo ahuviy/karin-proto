@@ -8,6 +8,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { WeightUnitPipe } from './pipes/weight-unit.pipe';
 import { IdToItemCategoryPipe } from './pipes/id-to-item-category.pipe';
 import { IdToBaseItemPipe } from './pipes/id-to-baseitem.pipe';
+import { IdToCompositeItemPipe } from './pipes/id-to-compositeitem.pipe';
 import { AlertDialog } from './components/alert/alert.dialog';
 import { ItemAutocompleteComponent } from './components/item-autocomplete/item-autocomplete.component';
 
@@ -18,6 +19,7 @@ import { ItemAutocompleteComponent } from './components/item-autocomplete/item-a
         WeightUnitPipe,
         IdToItemCategoryPipe,
         IdToBaseItemPipe,
+        IdToCompositeItemPipe,
         ItemAutocompleteComponent,
         AlertDialog,
     ],
@@ -40,6 +42,7 @@ import { ItemAutocompleteComponent } from './components/item-autocomplete/item-a
         WeightUnitPipe,
         IdToItemCategoryPipe,
         IdToBaseItemPipe,
+        IdToCompositeItemPipe,
         ItemAutocompleteComponent,
         AlertDialog,
     ],

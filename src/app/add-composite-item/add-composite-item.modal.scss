@@ -135,3 +135,16 @@ input {
 .right-side {
     padding: 20px;
 }
+
+.searchbar-wrapper {
+    padding: 14px;
+}
+
+.remove-ingr {
+    color: red;
+    opacity: 0.7;
+
+    &:hover {
+        opacity: 1;
+    }
+}

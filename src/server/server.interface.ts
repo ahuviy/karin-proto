@@ -49,8 +49,8 @@ export interface CompositeItem {
     name: string;
     hoursOfWork: number;
     ingredients: {
-        baseItemId: string;
-        // TODO: add compositeItemId to make composite of composites possible
+        baseItemId?: string;
+        compositeItemId?: string;
         amount: number;
     }[];
     itemCategoryId: string;

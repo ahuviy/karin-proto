@@ -15,7 +15,7 @@ export class CompositeItemsService {
         });
     }
 
-    create(created: Partial<CompositeItem>): Promise<CompositeItem[]> {
+    add(created: Partial<CompositeItem>): Promise<CompositeItem[]> {
         return new Promise((resolve, reject) => {
             api.compositeItem.create(created).then(res => {
                 const newCompositeItems = this.compositeItems.concat(res);
