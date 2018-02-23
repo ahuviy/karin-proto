@@ -10,7 +10,8 @@ import { ItemCategoriesService } from 'app/core/item-categories.service';
 import { BaseItem, CompositeItem } from 'server/server.interface';
 
 interface GeneralItem {
-    type: string;
+    isBaseItem?: boolean;
+    isCompositeItem?: boolean;
     item: BaseItem | CompositeItem;
 }
 
@@ -36,10 +37,10 @@ export class CategoriesPage {
     ).pipe(map(([ctgId, bis, cis]) => {
         const relevantCompItems = cis
             .filter(ci => ci.itemCategoryId === ctgId)
-            .map(ci => ({ type: 'compositeItem', item: ci }));
+            .map(ci => ({ isCompositeItem: true, item: ci }));
         const relevantBaseItems = bis
             .filter(bi => bi.itemCategoryId === ctgId)
-            .map(bi => ({ type: 'baseItem', item: bi }));
+            .map(bi => ({ isBaseItem: true, item: bi }));
         return (relevantBaseItems as GeneralItem[])
             .concat(relevantCompItems as GeneralItem[]);
     }));

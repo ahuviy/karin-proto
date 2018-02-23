@@ -5,12 +5,16 @@
             <mat-panel-description>
                 <span class="item-desc">{{generalItem.type | itemType}}</span>
             </mat-panel-description>
+            <i class="item-type-icon fa"
+                [class.fa-diamond]="generalItem.isBaseItem"
+                [class.fa-cutlery]="generalItem.isCompositeItem">
+            </i>
         </mat-expansion-panel-header>
         <ng-template matExpansionPanelContent>
-            <div *ngIf="generalItem.type === 'baseItem'">
-                TODO ahuvi!
-            </div>
-            <kp-compositeitem-details *ngIf="generalItem.type === 'compositeItem'"
+            <kp-baseitem-details *ngIf="generalItem.isBaseItem"
+                [baseItem]="generalItem.item">
+            </kp-baseitem-details>
+            <kp-compositeitem-details *ngIf="generalItem.isCompositeItem"
                 [compItem]="generalItem.item">
             </kp-compositeitem-details>
         </ng-template>

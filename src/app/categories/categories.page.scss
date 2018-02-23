@@ -1,0 +1,22 @@
+@import "vars";
+
+:host {
+    display: block;
+}
+
+.mat-expansion-panel {
+    position: relative;
+}
+
+.item-type-icon {
+    position: absolute;
+    left: 13px;
+}
+
+.fa-diamond {
+    color: map-get($colors, baseItemIcon);
+}
+
+.fa-cutlery {
+    color: map-get($colors, compItemIcon);
+}
