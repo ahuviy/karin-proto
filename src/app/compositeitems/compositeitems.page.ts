@@ -10,6 +10,7 @@ import { BaseItemsService } from 'app/core/base-items.service';
     templateUrl: './compositeitems.page.html'
 })
 export class CompositeItemsPage {
+    // TODO: edit item - add compositeItems as ingredients (currently only baseItems)
     compositeItems$ = this.compositeItemsService.compositeItems$.pipe(
         map(cis => cis || []),
     );

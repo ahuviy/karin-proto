@@ -1,1 +1,18 @@
-Category page works!
+<mat-accordion class="category-list" multi="true" displayMode="default">
+    <mat-expansion-panel hideToggle="true" *ngFor="let generalItem of generalItems$ | async">
+        <mat-expansion-panel-header>
+            <mat-panel-title>{{generalItem.item.name}}</mat-panel-title>
+            <mat-panel-description>
+                <span class="item-desc">{{generalItem.type | itemType}}</span>
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+            <div *ngIf="generalItem.type === 'baseItem'">
+                TODO ahuvi!
+            </div>
+            <kp-compositeitem-details *ngIf="generalItem.type === 'compositeItem'"
+                [compItem]="generalItem.item">
+            </kp-compositeitem-details>
+        </ng-template>
+    </mat-expansion-panel>
+</mat-accordion>

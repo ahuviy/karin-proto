@@ -9,7 +9,10 @@ import { WeightUnitPipe } from './pipes/weight-unit.pipe';
 import { IdToItemCategoryPipe } from './pipes/id-to-item-category.pipe';
 import { IdToBaseItemPipe } from './pipes/id-to-baseitem.pipe';
 import { IdToCompositeItemPipe } from './pipes/id-to-compositeitem.pipe';
+import { ItemTypePipe } from './pipes/item-type.pipe';
 import { AlertDialog } from './components/alert/alert.dialog';
+import { CompositeItemDetailsComponent } from './components/compositeitem-details/compositeitem-details.component';
+import { IngredientComponent } from './components/compositeitem-details/ingredient/ingredient.component';
 import { ItemAutocompleteComponent } from './components/item-autocomplete/item-autocomplete.component';
 
 @NgModule({
@@ -20,8 +23,11 @@ import { ItemAutocompleteComponent } from './components/item-autocomplete/item-a
         IdToItemCategoryPipe,
         IdToBaseItemPipe,
         IdToCompositeItemPipe,
+        ItemTypePipe,
         ItemAutocompleteComponent,
         AlertDialog,
+        CompositeItemDetailsComponent,
+        IngredientComponent,
     ],
     entryComponents: [
         AlertDialog,
@@ -43,8 +49,11 @@ import { ItemAutocompleteComponent } from './components/item-autocomplete/item-a
         IdToItemCategoryPipe,
         IdToBaseItemPipe,
         IdToCompositeItemPipe,
+        ItemTypePipe,
         ItemAutocompleteComponent,
         AlertDialog,
+        CompositeItemDetailsComponent,
+        IngredientComponent,
     ],
 })
 export class SharedModule { }

@@ -11,7 +11,7 @@ const routes: Routes = [
     { path: 'baseitems', loadChildren: 'app/baseitems/baseitems.module#BaseCompositeItemsModule' },
     { path: 'compositeitems', component: CompositeItemsPage },
     { path: 'distributors', component: DistributorsPage },
-    { path: 'category/:categoryId', loadChildren: 'app/categories/categories.module#CategoriesModule' },
+    { path: 'category', loadChildren: 'app/categories/categories.module#CategoriesModule' },
     { path: 'unrecognized', component: UnrecognizedPage },
     { path: '**', redirectTo: 'unrecognized' },
 ];
