@@ -15,6 +15,8 @@ import { ItemCategoriesService } from 'app/core/item-categories.service';
 })
 export class AddBaseItemModal {
     // TODO: baseitems should be priced in either price/gram(kilogram) or price/item
+    // do it via radio for type of price, and number-input for the price.
+    // add a field for amount-per-item (כמות באריזה).
     itemCategoryOptions$ = this.itemCategoriesService.itemCategories$.pipe(
         map(ics => {
             const nullCategory = { id: undefined, text: '' };
