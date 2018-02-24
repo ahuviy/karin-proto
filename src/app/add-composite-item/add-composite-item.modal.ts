@@ -20,6 +20,7 @@ import { ItemAutocompleteOption } from 'app/shared/components/item-autocomplete/
     templateUrl: './add-composite-item.modal.html',
 })
 export class AddCompositeItemModal {
+    // TODO: composite item ingredients should be added by gram/kilogram amounts
     itemCategoryOptions$ = this.itemCategoriesService.itemCategories$.pipe(
         map(ics => {
             const nullCategory = { id: undefined, text: '' };

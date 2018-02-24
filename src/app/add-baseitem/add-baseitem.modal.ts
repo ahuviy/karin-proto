@@ -14,6 +14,7 @@ import { ItemCategoriesService } from 'app/core/item-categories.service';
     templateUrl: './add-baseitem.modal.html',
 })
 export class AddBaseItemModal {
+    // TODO: baseitems should be priced in either price/gram(kilogram) or price/item
     itemCategoryOptions$ = this.itemCategoriesService.itemCategories$.pipe(
         map(ics => {
             const nullCategory = { id: undefined, text: '' };
