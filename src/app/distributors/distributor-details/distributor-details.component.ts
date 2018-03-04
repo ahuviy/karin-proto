@@ -1,5 +1,5 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 
 import { AlertDialog } from 'app/shared/components/alert/alert.dialog';
@@ -13,10 +13,16 @@ import { Distributor } from 'server/server.interface';
 })
 export class DistributorDetailsComponent {
     @Input() set dst(val: Distributor) {
-        this.form = this.fb.group(val);
+        this.form.reset(val);
     }
 
-    form: FormGroup;
+    form: FormGroup = this.fb.group({
+        id: null,
+        name: [null, Validators.required],
+        phoneNumber: [null, Validators.required],
+        daysToDeliver: [null, Validators.required],
+        percentDiscount: [0, Validators.required],
+    });
 
     constructor(
         private dialog: MatDialog,

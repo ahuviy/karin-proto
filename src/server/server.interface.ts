@@ -28,10 +28,11 @@ export interface Settings {
 }
 
 export interface Distributor {
-    // TODO: add daysToDeliver
     id: string;
     name: string;
     phoneNumber: string;
+    daysToDeliver: number;
+    percentDiscount: number;
 }
 
 export interface BaseItem {

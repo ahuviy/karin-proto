@@ -54,9 +54,9 @@ function getInitialDb(): Db {
 
     function initDistributors(): Distributor[] {
         return [
-            { id: getId(), name: 'אפי', phoneNumber: '0541234561' },
-            { id: getId(), name: 'שלומי', phoneNumber: '0528769696' },
-            { id: getId(), name: 'גיורא', phoneNumber: '0504437722' },
+            { id: getId(), name: 'אפי', phoneNumber: '0541234561', daysToDeliver: 2, percentDiscount: 0 },
+            { id: getId(), name: 'שלומי', phoneNumber: '0528769696', daysToDeliver: 4, percentDiscount: 0 },
+            { id: getId(), name: 'גיורא', phoneNumber: '0504437722', daysToDeliver: 1, percentDiscount: 10 },
         ];
     }
 

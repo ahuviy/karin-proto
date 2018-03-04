@@ -13,6 +13,14 @@
         <mat-form-field>
             <input matInput placeholder="טלפון" formControlName="phoneNumber">
         </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" placeholder="זמן אספקה (ימים)" min="0"
+                formControlName="daysToDeliver">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="number" placeholder="אחוז הנחה" min="0" max="100"
+                formControlName="percentDiscount">
+        </mat-form-field>
     </div>
     <div class="modal-footer">
         <button class="submit-btn" mat-button type="submit">

@@ -28,6 +28,8 @@ export interface Distributor {
     id: string;
     name: string;
     phoneNumber: string;
+    daysToDeliver: number;
+    percentDiscount: number;
 }
 
 export interface ItemCategory {

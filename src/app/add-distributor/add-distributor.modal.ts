@@ -17,6 +17,8 @@ export class AddDistributorModal {
     form: FormGroup = this.fb.group({
         name: [null, Validators.required],
         phoneNumber: [null, Validators.required],
+        daysToDeliver: [null, Validators.required],
+        percentDiscount: 0
     });
 
     constructor(
