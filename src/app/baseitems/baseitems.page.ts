@@ -8,7 +8,6 @@ import { BaseItemsService } from 'app/core/base-items.service';
     templateUrl: './baseitems.page.html',
 })
 export class BaseItemsPage {
-    // TODO: refactor to fit with new baseitem model
     baseItems$ = this.baseItemsService.baseItems$;
 
     constructor(

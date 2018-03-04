@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { map, shareReplay } from 'rxjs/operators';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { map, startWith, shareReplay } from 'rxjs/operators';
+import { Observable } from 'rxjs/Observable';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { MatDialog } from '@angular/material';
 
@@ -19,11 +20,22 @@ import * as server from 'server/server.interface';
 export class BaseItemsEntryComponent {
     @Input() set baseItem(val: server.BaseItem) {
         this._baseItem = val;
-        this.form = this.fb.group(val);
+        this.form.reset(val);
+        this.setFormEvents();
     }
 
     _baseItem: server.BaseItem;
-    form: FormGroup;
+    form: FormGroup = this.fb.group({
+        id: null,
+        distributorId: [null, Validators.required],
+        name: [null, Validators.required],
+        weight: [null, Validators.required],
+        weightUnit: null,
+        price: [null, Validators.required],
+        priceBy: null,
+        itemCategoryId: null,
+    });
+    priceByWeight$: Observable<boolean>;
     currencySymbol$ = this.settingsService.settings$.pipe(map(s => s.currency.symbol));
     category$ = this.itemCategoriesService.itemCategories$.pipe(
         map(ics => {
@@ -94,6 +106,23 @@ export class BaseItemsEntryComponent {
                     });
                 }
             });
+        });
+    }
+
+    private setFormEvents() {
+        this.priceByWeight$ = this.form.get('priceBy').valueChanges.pipe(
+            startWith(this.form.value.priceBy),
+            map(val => val === 'weight'),
+            shareReplay(1),
+        );
+        this.form.get('priceBy').valueChanges.subscribe(val => {
+            if (val === 'weight') {
+                this.form.get('weight').enable();
+                this.form.get('weightUnit').enable();
+            } else {
+                this.form.get('weight').disable();
+                this.form.get('weightUnit').disable();
+            }
         });
     }
 }

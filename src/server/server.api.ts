@@ -86,6 +86,10 @@ export const api = {
             const user = getCurrentUser();
             const i = user.baseItems.findIndex(bi => bi.id === updated.id);
             Object.assign(user.baseItems[i], updated);
+            if (updated.priceBy === 'package') {
+                user.baseItems[i].weight = null;
+                user.baseItems[i].weightUnit = null;
+            }
             saveDb();
             return Promise.resolve(cloneDeep(user.baseItems[i]));
         },
