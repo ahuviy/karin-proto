@@ -11,10 +11,17 @@
             <mat-form-field>
                 <input matInput placeholder="שם" formControlName="name">
             </mat-form-field>
-            <mat-form-field>
+            <div class="pricing-type">
+                <div>סוג התמחור</div>
+                <mat-radio-group formControlName="priceBy">
+                    <mat-radio-button value="weight">לפי משקל</mat-radio-button>
+                    <mat-radio-button value="package">לפי אריזה</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <mat-form-field *ngIf="priceByWeight$ | async">
                 <input matInput type="number" placeholder="משקל" formControlName="weight">
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field *ngIf="priceByWeight$ | async">
                 <mat-select placeholder="יחידת משקל" formControlName="weightUnit">
                     <mat-option value="gram">גרם</mat-option>
                     <mat-option value="kilogram">ק״ג</mat-option>
@@ -22,10 +29,6 @@
             </mat-form-field>
         </div>
         <div class="left-side">
-            <mat-form-field>
-                <input matInput type="number" placeholder="מחיר ({{currencySymbol$ | async}})"
-                    formControlName="price">
-            </mat-form-field>
             <mat-form-field>
                 <mat-select placeholder="ספק" formControlName="distributorId">
                     <mat-option *ngFor="let opt of distributorOptions$ | async" [value]="opt.id">
@@ -39,6 +42,10 @@
                         {{opt.text}}
                     </mat-option>
                 </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="number" placeholder="מחיר ({{currencySymbol$ | async}})"
+                    formControlName="price">
             </mat-form-field>
         </div>
     </div>

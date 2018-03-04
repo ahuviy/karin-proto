@@ -41,6 +41,7 @@ export interface BaseItem {
     weight: number;
     weightUnit: WeightUnit;
     price: number;
+    priceBy: 'weight' | 'package';
     itemCategoryId: string;
 }
 

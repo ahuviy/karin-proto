@@ -66,9 +66,10 @@ function getInitialDb(): Db {
                 id: getId(),
                 distributorId: user.distributors[0].id,
                 name: 'אורז בסמטי',
-                weight: 250,
-                weightUnit: 'gram',
-                price: 12,
+                weight: 5,
+                weightUnit: 'kilogram',
+                price: 25,
+                priceBy: 'weight',
                 itemCategoryId: null,
             },
         ];

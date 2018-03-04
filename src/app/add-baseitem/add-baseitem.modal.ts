@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { map } from 'rxjs/operators';
+import { map, startWith, shareReplay } from 'rxjs/operators';
 
 import { BaseItemsService } from 'app/core/base-items.service';
 import { SettingsService } from 'app/core/settings.service';
@@ -14,9 +14,6 @@ import { ItemCategoriesService } from 'app/core/item-categories.service';
     templateUrl: './add-baseitem.modal.html',
 })
 export class AddBaseItemModal {
-    // TODO: baseitems should be priced in either price/gram(kilogram) or price/item
-    // do it via radio for type of price, and number-input for the price.
-    // add a field for amount-per-item (כמות באריזה).
     itemCategoryOptions$ = this.itemCategoriesService.itemCategories$.pipe(
         map(ics => {
             const nullCategory = { id: undefined, text: '' };
@@ -41,8 +38,15 @@ export class AddBaseItemModal {
         weight: [null, Validators.required],
         weightUnit: 'gram',
         price: [null, Validators.required],
+        priceBy: 'weight',
         itemCategoryId: null,
     });
+
+    priceByWeight$ = this.form.get('priceBy').valueChanges.pipe(
+        startWith(this.form.value.priceBy),
+        map(val => val === 'weight'),
+        shareReplay(1),
+    );
 
     constructor(
         private fb: FormBuilder,
@@ -54,6 +58,18 @@ export class AddBaseItemModal {
         @Inject(MAT_DIALOG_DATA) private data: any,
     ) { }
 
+    ngOnInit() {
+        this.form.get('priceBy').valueChanges.subscribe(val => {
+            if (val === 'weight') {
+                this.form.get('weight').enable();
+                this.form.get('weightUnit').enable();
+            } else {
+                this.form.get('weight').disable();
+                this.form.get('weightUnit').disable();
+            }
+        });
+    }
+
     close() {
         this.dialogRef.close();
     }
@@ -63,6 +79,7 @@ export class AddBaseItemModal {
             return;
         }
         this.baseItemsService.add(this.form.value).then(res => {
+            console.log('res:',res);
             this.dialogRef.close('success');
         }, err => {
             console.log('failure:', err);

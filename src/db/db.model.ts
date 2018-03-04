@@ -39,9 +39,10 @@ export interface BaseItem {
     id: string;
     distributorId: string;
     name: string;
-    weight: number;
-    weightUnit: WeightUnit;
+    weight: number;  // is undefined if priceBy = 'package'
+    weightUnit: WeightUnit;  // is undefined if priceBy = 'package'
     price: number;
+    priceBy: 'weight' | 'package';
     itemCategoryId: string;
 }
 

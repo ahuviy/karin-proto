@@ -17,6 +17,8 @@ export class BaseItemsService {
 
     add(baseItem: Partial<BaseItem>): Promise<BaseItem[]> {
         return new Promise((resolve, reject) => {
+            if (!baseItem.weight) baseItem.weight = null;
+            if (!baseItem.weightUnit) baseItem.weightUnit = null;
             api.baseItem.create(baseItem).then(res => {
                 const newBaseItems = this.baseItems.concat(res);
                 this._baseItems$.next(newBaseItems);

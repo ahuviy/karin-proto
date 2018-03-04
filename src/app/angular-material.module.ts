@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { MatTooltipModule, MatAutocompleteModule, MatIconModule, MatSelectModule, MatButtonModule, MatDialogModule, MatInputModule, MatExpansionModule } from '@angular/material';
+import { MatTooltipModule, MatRadioModule, MatAutocompleteModule, MatIconModule, MatSelectModule, MatButtonModule, MatDialogModule, MatInputModule, MatExpansionModule } from '@angular/material';
 
 @NgModule({
     imports: [
         MatIconModule,
+        MatRadioModule,
         MatAutocompleteModule,
         MatButtonModule,
         MatDialogModule,
@@ -14,6 +15,7 @@ import { MatTooltipModule, MatAutocompleteModule, MatIconModule, MatSelectModule
     ],
     exports: [
         MatIconModule,
+        MatRadioModule,
         MatAutocompleteModule,
         MatButtonModule,
         MatDialogModule,
