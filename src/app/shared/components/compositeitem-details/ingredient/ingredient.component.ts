@@ -19,12 +19,13 @@ export class IngredientComponent {
     @ViewChild('amountInput') amountInput: ElementRef;
 
     baseItemOptions$ = this.baseItemsService.baseItems$.pipe(
-        map(bis => {
-            return bis.map(bi => ({
-                id: bi.id,
-                text: `${bi.name} (${bi.weight} ${weightUnitMap[bi.weightUnit]})`
-            }));
-        }),
+        map(bis => bis.map(bi => {
+            const { id, name, weight, weightUnit, priceBy } = bi;
+            const text = priceBy === 'weight'
+                ? `${name} (${weight} ${weightUnitMap[weightUnit]})`
+                : name;
+            return { id, text };
+        })),
     );
 
     constructor(private baseItemsService: BaseItemsService) { }
@@ -40,7 +41,9 @@ export class IngredientComponent {
     get baseItemDescription() {
         if (this.ingCtrl.value.baseItemId) {
             const baseItem = this.baseItemsService.baseItems.find(bi => bi.id === this.ingCtrl.value.baseItemId);
-            return `${baseItem.name} (${baseItem.weight} ${weightUnitMap[baseItem.weightUnit]})`;
+            return baseItem.priceBy === 'weight'
+                ? `${baseItem.name} (${baseItem.weight} ${weightUnitMap[baseItem.weightUnit]})`
+                : baseItem.name;
         } else {
             return '';
         }
