@@ -1,0 +1,1 @@
+scp -r -i LightsailDefaultPrivateKey-eu-west-1.pem src bitnami@34.255.125.118:ahuvi
