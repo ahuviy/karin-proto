@@ -7,7 +7,7 @@ import { RouterLinkActive } from '@angular/router';
     styleUrls: ['./side-bar-link.component.scss']
 })
 export class SideBarLinkComponent {
-    @Input() link;
+    @Input() link: Link;
 
     isHovered = false;
 
@@ -15,9 +15,18 @@ export class SideBarLinkComponent {
 
     @HostBinding('class.active') get isActive() { return this.rla.isActive; }
 
-    execLinkAction(event) {
+    execLinkAction(type: 'add' | 'rem', event) {
         event.preventDefault();
         event.stopPropagation();
-        this.link.addAction();
+        if (type === 'add') this.link.addAction();
+        else if (type === 'rem') this.link.remAction();
     }
+}
+
+interface Link {
+    url: string;
+    options: any;
+    icon: string;
+    addAction?: Function;
+    remAction?: Function
 }

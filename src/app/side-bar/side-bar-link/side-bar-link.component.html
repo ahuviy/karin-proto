@@ -1,7 +1,10 @@
 <a [routerLink]="link.url" routerLinkActive [routerLinkActiveOptions]="link.options">
     <i class="fa fa-{{link.icon}}"></i>
     <span>{{link.text}}</span>
-    <mat-icon class="add-icon" *ngIf="link.addAction" (click)="execLinkAction($event)">
+    <mat-icon class="icon" *ngIf="link.addAction" (click)="execLinkAction('add', $event)">
         add
+    </mat-icon>
+    <mat-icon class="icon" *ngIf="link.remAction" (click)="execLinkAction('rem', $event)">
+        delete
     </mat-icon>
 </a>
