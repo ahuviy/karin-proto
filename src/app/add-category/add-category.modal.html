@@ -1,0 +1,19 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="modal-title">
+        <span>
+            <i class="fa fa-folder"></i>
+            <span>הוספת קטגוריה</span>
+        </span>
+        <mat-icon class="close" (click)="close()">close</mat-icon>
+    </div>
+    <div class="modal-body">
+        <mat-form-field>
+            <input matInput placeholder="שם הקטגוריה" formControlName="name">
+        </mat-form-field>
+    </div>
+    <div class="modal-footer">
+        <button class="submit-btn" mat-button type="submit" [disabled]="form.invalid">
+            הוסף
+        </button>
+    </div>
+</form>

@@ -2,6 +2,9 @@
     <kp-side-bar-link *ngFor="let link of links" [link]="link"></kp-side-bar-link>
 </ul>
 <ul class="links">
+    <div class="add-category" (click)="addCategory()">
+        <i class="fa fa-plus-circle"></i>
+        <span>הוסף קטגוריה</span>
+    </div>
     <kp-side-bar-link *ngFor="let cat of categories$ | async" [link]="cat"></kp-side-bar-link>
-    <!-- TODO: add functionality to add categories -->
 </ul>

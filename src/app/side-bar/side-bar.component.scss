@@ -20,3 +20,20 @@
     padding-bottom: 8px;
     margin-bottom: 13px;
 }
+
+.add-category {
+    padding-right: 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.03);
+        border-radius: 2px;
+    }
+
+    span {
+        display: inline-block;
+        padding-right: 24px;
+    }
+}

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { AddBaseItemModal } from 'app/add-baseitem/add-baseitem.modal';
 import { AddCompositeItemModal } from 'app/add-composite-item/add-composite-item.modal';
 import { AddDistributorModal } from 'app/add-distributor/add-distributor.modal';
+import { AddCategoryModal } from 'app/add-category/add-category.modal';
 import { AlertDialog } from 'app/shared/components/alert/alert.dialog';
 import { routeLabels } from 'constants/route.consts';
 import { ItemCategoriesService } from 'app/core/item-categories.service';
@@ -98,5 +99,12 @@ export class SideBarComponent {
 
     ngOnInit() {
         this.itemCategoriesService.refresh();
+    }
+
+    addCategory() {
+        this.dialog.open(AddCategoryModal, {
+            direction: 'rtl',
+            panelClass: 'kp-add-baseitem-modal-wrapper',
+        });
     }
 }

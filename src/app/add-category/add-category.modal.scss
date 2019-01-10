@@ -1,0 +1,48 @@
+@import "vars";
+
+:host {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.modal-title {
+    border-bottom: 1px solid $modalSepColor;
+    box-sizing: border-box;
+    color: white;
+    font-size: 16px;
+    height: 49px;
+    line-height: 49px;
+    padding: 0 14px;
+    text-align: right;
+    background-color: #424242;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.close {
+    cursor: pointer;
+
+    &:hover {
+        color: lightgray;
+    }
+}
+
+.modal-body {
+    box-sizing: border-box;
+    display: flex;
+    flex: 1;
+    padding: 14px;
+}
+
+.modal-footer {
+    box-sizing: border-box;
+    padding: 6px;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 1px solid $modalSepColor;
+    background-color: white;
+}

@@ -16,6 +16,7 @@ import { SettingsModal } from 'app/settings/settings.modal';
 import { AddBaseItemModal } from 'app/add-baseitem/add-baseitem.modal';
 import { AddCompositeItemModal } from 'app/add-composite-item/add-composite-item.modal';
 import { AddDistributorModal } from 'app/add-distributor/add-distributor.modal';
+import { AddCategoryModal } from 'app/add-category/add-category.modal';
 import { DistributorsModule } from 'app/distributors/distributors.module';
 
 @NgModule({
@@ -28,6 +29,7 @@ import { DistributorsModule } from 'app/distributors/distributors.module';
         AddBaseItemModal,
         AddCompositeItemModal,
         AddDistributorModal,
+        AddCategoryModal,
         UnrecognizedPage,
         HomePage,
     ],
@@ -36,6 +38,7 @@ import { DistributorsModule } from 'app/distributors/distributors.module';
         AddBaseItemModal,
         AddCompositeItemModal,
         AddDistributorModal,
+        AddCategoryModal,
     ],
     imports: [
         BrowserModule,
