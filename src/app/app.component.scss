@@ -23,6 +23,7 @@
     width: $rightMenuWidth;
     position: fixed;
     z-index: 1;
+    overflow: hidden;
     transform: translateX(#{$rightMenuWidth + 2px});
     transition: transform 0.2s ease-in-out;
 

@@ -2,12 +2,13 @@
 
 :host {
     display: block;
+    height: 100%;
     padding: 12px 8px 52px;
     width: $rightMenuWidth - 16px;
     color: #616161;
     line-height: 40px;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     white-space: nowrap;
 }
 
