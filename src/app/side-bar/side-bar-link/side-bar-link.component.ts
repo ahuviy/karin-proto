@@ -27,6 +27,7 @@ interface Link {
     url: string;
     options: any;
     icon: string;
+    text: string;
     addAction?: Function;
     remAction?: Function
 }

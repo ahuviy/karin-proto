@@ -44,7 +44,9 @@ export class CompositeItemDetailsComponent {
         private compositeItemsService: CompositeItemsService,
         private itemCategoriesService: ItemCategoriesService,
         private fb: FormBuilder,
-    ) { window['ahuvi']=this}
+    ) { }
+
+    get ingredients(): FormArray { return this.form.get('ingredients') as FormArray; }
 
     update() {
         this.compositeItemsService.update(this.form.value).then(res => {

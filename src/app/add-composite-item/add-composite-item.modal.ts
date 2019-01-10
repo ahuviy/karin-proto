@@ -59,6 +59,8 @@ export class AddCompositeItemModal {
         @Inject(MAT_DIALOG_DATA) private data: any,
     ) { }
 
+    get ingredientsFormArray(): FormArray { return this.form.get('ingredients') as FormArray; }
+
     onItemSelected(opt: ItemAutocompleteOption) {
         (this.form.get('ingredients') as FormArray).push(this.fb.group({
             baseItemId: (opt.type === 'baseItem') ? opt.item.id : null,

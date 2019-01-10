@@ -15,7 +15,7 @@
         </mat-form-field>
     </div>
     <div class="ingredients-title">רכיבים</div>
-    <div *ngFor="let ing of form.get('ingredients').controls; index as i">
+    <div *ngFor="let ing of ingredients.controls; index as i">
         <kp-ingredient
             [ingCtrl]="ing"
             (delete)="remIngredient(i)">

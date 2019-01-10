@@ -4,12 +4,7 @@
     </button>
     <span>{{currentRoute$ | async}}</span>
 </div>
-<div class="searchbar-wrapper">
-    <div class="icon-wrapper flex-center-center">
-        <i class="fa fa-search"></i>
-    </div>
-    <input class="searchbar" placeholder="חיפוש">
-</div>
+<kp-main-search></kp-main-search>
 <div class="settings-wrapper flex-center-center">
     <i class="fa fa-lg fa-cog clickable" (click)="openSettingsModal()"></i>
 </div>

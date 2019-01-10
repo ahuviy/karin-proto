@@ -5,6 +5,10 @@
     height: 100%;
 }
 
+i {
+    color: #fff;
+}
+
 .title-section {
     height: 100%;
     display: flex;
@@ -29,39 +33,6 @@
     &:hover {
         opacity: 1;
     }
-}
-
-.searchbar-wrapper {
-    border-radius: 2px;
-    width: 40%;
-    min-width: 144px;
-    position: relative;
-    display: flex;
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.icon-wrapper {
-    position: relative;
-    height: 36px;
-    width: 72px;
-}
-
-.searchbar {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 1.2em;
-    height: 36px;
-    padding-right: 10px;
-    width: 100%;
-
-    &::placeholder {
-        color: #fff;
-    }
-}
-
-i {
-    color: #fff;
 }
 
 .settings-wrapper {
@@ -90,4 +61,8 @@ i {
     outline: none;
     overflow: hidden;
     width: 600px;
+}
+
+kp-main-search {
+    width: 40%;
 }

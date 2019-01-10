@@ -1,4 +1,3 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -7,6 +6,7 @@ import { AppRouting } from './app.routing';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { SideBarLinkComponent } from './side-bar/side-bar-link/side-bar-link.component';
+import { MainSearchComponent } from 'app/top-bar/main-search/main-search.component';
 import { HomePage } from './home/home.page';
 import { UnrecognizedPage } from './unrecognized/unrecogrnized.page';
 import { CoreModule } from 'app/core/core.module';
@@ -24,6 +24,7 @@ import { DistributorsModule } from 'app/distributors/distributors.module';
         AppComponent,
         SideBarComponent,
         SideBarLinkComponent,
+        MainSearchComponent,
         TopBarComponent,
         SettingsModal,
         AddBaseItemModal,
@@ -41,7 +42,6 @@ import { DistributorsModule } from 'app/distributors/distributors.module';
         AddCategoryModal,
     ],
     imports: [
-        BrowserModule,
         BrowserAnimationsModule,
         CoreModule,
         SharedModule,
