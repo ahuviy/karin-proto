@@ -92,7 +92,9 @@ export class AddCompositeItemModal {
         if (opt.type === 'baseItem') {
             const baseItem = this.baseItemsService.baseItems
                 .find(bi => bi.id === opt.item.id);
-            return `${baseItem.name} (${baseItem.weight} ${weightUnitMap[baseItem.weightUnit]})`;
+            const parenthesis = (baseItem.priceBy === 'package')
+                ? 'אריזה' : `${baseItem.weight} ${weightUnitMap[baseItem.weightUnit]}`;
+            return `${baseItem.name} (${parenthesis})`;
         } else {
             const compositeItem = this.compositeItemsService.compositeItems
                 .find(ci => ci.id === opt.item.id);
