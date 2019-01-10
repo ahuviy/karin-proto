@@ -21,7 +21,10 @@
             </mat-select>
         </mat-form-field>
         <div class="searchbar-wrapper">
-            <kp-item-autocomplete (selected)="onItemSelected($event)"></kp-item-autocomplete>
+            <kp-item-autocomplete
+                [blacklist]="form.get('ingredients').value"
+                (selected)="onItemSelected($event)">
+            </kp-item-autocomplete>
         </div>
         <div *ngFor="let ingr of form.get('ingredients').controls; index as i" [formGroup]="ingr">
             <span>{{ingredients[i].label}}</span>

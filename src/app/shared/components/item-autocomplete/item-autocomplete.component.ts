@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, Output, EventEmitter, ElementRef, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatInput } from '@angular/material';
 import { map, startWith } from 'rxjs/operators';
@@ -8,10 +8,16 @@ import { Observable } from 'rxjs/Observable';
 import { BaseItemsService } from 'app/core/base-items.service';
 import { CompositeItemsService } from 'app/core/composite-items.service';
 import { BaseItem, CompositeItem } from 'server/server.interface';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 export interface ItemAutocompleteOption {
     type: string;
     item: BaseItem | CompositeItem;
+}
+
+interface BlacklistItem {
+    baseItemId: string;
+    compositeItemId: string;
 }
 
 @Component({
@@ -20,9 +26,15 @@ export interface ItemAutocompleteOption {
     templateUrl: './item-autocomplete.component.html',
 })
 export class ItemAutocompleteComponent {
+    // A blacklist of options that will not appear in the dropdown.
+    @Input() set blacklist(val: BlacklistItem[]) {
+        this._blacklist$.next(val || []);
+    }
+
     @Output() selected = new EventEmitter<ItemAutocompleteOption>();
 
     search = new FormControl('');
+    _blacklist$ = new BehaviorSubject<BlacklistItem[]>([]);
 
     searchStr$: Observable<string> = this.search.valueChanges.pipe(
         startWith(''),
@@ -51,12 +63,18 @@ export class ItemAutocompleteComponent {
 
     filteredOptions$: Observable<ItemAutocompleteOption[]> = combineLatest(
         this.allOptions$,
-        this.searchStr$
+        this.searchStr$,
+        this._blacklist$,
     ).pipe(
-        map(([options, searchStr]) => {
-            return searchStr ? options.filter(opt => {
-                return opt.item.name.toLowerCase().indexOf(searchStr.toLowerCase()) === 0;
-            }) : options.slice();
+        map(([options, searchStr, blacklist]) => {
+            if (searchStr) {
+                return options.filter(opt => {
+                    return (opt.item.name.toLowerCase().indexOf(searchStr.toLowerCase()) === 0)
+                        && !this.isOptionInBlacklist(opt, blacklist);
+                })
+            } else {
+                return options.filter(opt => !this.isOptionInBlacklist(opt, blacklist));
+            }
         })
     );
 
@@ -83,5 +101,12 @@ export class ItemAutocompleteComponent {
     displayFn(option?: ItemAutocompleteOption): string {
         if (typeof option === 'string') return option;
         else return option.item.name;
+    }
+
+    private isOptionInBlacklist(option: ItemAutocompleteOption, blacklist: BlacklistItem[]) {
+        return blacklist.some(bl => {
+            return (option.type === 'baseItem' && option.item.id === bl.baseItemId)
+                || (option.type === 'compositeItem' && option.item.id === bl.compositeItemId);
+        });
     }
 }
