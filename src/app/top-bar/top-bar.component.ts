@@ -6,7 +6,7 @@ import { filter, map } from 'rxjs/operators';
 import { SideNavService } from 'app/core/side-nav.service';
 import { routeLabels } from 'constants/route.consts';
 import { SettingsModal } from 'app/settings/settings.modal';
-// TODO: give the searchbar a dropdown for where to search: all|baseitems|compositeitems|distributors|categories...
+
 @Component({
     selector: 'kp-top-bar',
     styleUrls: ['./top-bar.component.scss'],

@@ -7,11 +7,12 @@ import { Observable } from 'rxjs/Observable';
 import { BaseItemsService } from 'app/core/base-items.service';
 import { CompositeItemsService } from 'app/core/composite-items.service';
 import { DistributorsService } from 'app/core/distributors.service';
-import { ItemAutocompleteOption } from './main-search.interface';
+import { ItemAutocompleteOption, ItemAutocompleteType } from './main-search.interface';
 
 /**
  * This is the main search interface of the app.
  * It can search all data with autocomplete features.
+ * TODO: give the searchbar a dropdown for where to search: all|baseitems|compositeitems|distributors
  */
 @Component({
     selector: 'kp-main-search',
@@ -38,15 +39,15 @@ export class MainSearchComponent {
     ).pipe(
         map(([bis, cis, dists]) => {
             const baseItems = bis ? bis.map(bi => ({
-                type: 'baseItem',
+                type: ItemAutocompleteType.baseItem,
                 item: bi
             })) : [] as ItemAutocompleteOption[];
             const compositeItems = cis ? cis.map(ci => ({
-                type: 'compositeItem',
+                type: ItemAutocompleteType.compositeItem,
                 item: ci
             })) : [] as ItemAutocompleteOption[];
             const distributors = dists ? dists.map(d => ({
-                type: 'distributor',
+                type: ItemAutocompleteType.distributor,
                 item: d,
             })) : [] as ItemAutocompleteOption[];
             return [...baseItems, ...compositeItems, ...distributors];
