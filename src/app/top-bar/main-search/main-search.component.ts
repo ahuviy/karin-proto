@@ -3,16 +3,17 @@ import { FormControl } from '@angular/forms';
 import { map, startWith } from 'rxjs/operators';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { BaseItemsService } from 'app/core/base-items.service';
 import { CompositeItemsService } from 'app/core/composite-items.service';
 import { DistributorsService } from 'app/core/distributors.service';
-import { ItemAutocompleteOption, ItemAutocompleteType } from './main-search.interface';
+import { ItemAutocompleteOption, ItemAutocompleteType, DropdownOption } from './main-search.interface';
+import { dropdownOptions } from './main-search.utils';
 
 /**
  * This is the main search interface of the app.
  * It can search all data with autocomplete features.
- * TODO: give the searchbar a dropdown for where to search: all|baseitems|compositeitems|distributors
  */
 @Component({
     selector: 'kp-main-search',
@@ -23,6 +24,9 @@ export class MainSearchComponent {
     @Output() selected = new EventEmitter<ItemAutocompleteOption>();
 
     search = new FormControl('');
+    isDropdownOpen = false;
+    dropdownSelection$ = new BehaviorSubject<DropdownOption>(dropdownOptions[0]);
+    dropdownOptions = dropdownOptions;
 
     searchStr$: Observable<string> = this.search.valueChanges.pipe(
         startWith(''),
@@ -57,14 +61,16 @@ export class MainSearchComponent {
     filteredOptions$: Observable<ItemAutocompleteOption[]> = combineLatest(
         this.allOptions$,
         this.searchStr$,
+        this.dropdownSelection$,
     ).pipe(
-        map(([options, searchStr]) => {
+        map(([options, searchStr, ddSelection]) => {
             if (searchStr) {
                 return options.filter(opt => {
-                    return (opt.item.name.toLowerCase().indexOf(searchStr.toLowerCase()) === 0);
-                })
+                    const isInSearch = opt.item.name.toLowerCase().includes(searchStr.toLowerCase());
+                    return isInSearch && this.isOptionInDropdownSelection(opt, ddSelection);
+                });
             } else {
-                return options.slice();
+                return options.filter(opt => this.isOptionInDropdownSelection(opt, ddSelection));
             }
         })
     );
@@ -112,5 +118,30 @@ export class MainSearchComponent {
                 throw new Error('could not recognize ItemAutocompleteOption type');
         }
         return `${option.item.name} (${parenthesis})`
+    }
+
+    toggleDropdown() {
+        this.isDropdownOpen = !this.isDropdownOpen;
+    }
+
+    closeDropdown() {
+        this.isDropdownOpen = false;
+    }
+
+    selectOption(option) {
+        this.dropdownSelection$.next(option);
+        this.isDropdownOpen = false;
+    }
+
+    private isOptionInDropdownSelection(opt: ItemAutocompleteOption, ddSelection: DropdownOption) {
+        if (ddSelection.value === 'all') {
+            return true;
+        } else if (ddSelection.value === 'baseItems') {
+            return (opt.type === ItemAutocompleteType.baseItem);
+        } else if (ddSelection.value === 'compositeItems') {
+            return (opt.type === ItemAutocompleteType.compositeItem);
+        } else if (ddSelection.value === 'distributors') {
+            return (opt.type === ItemAutocompleteType.distributor);
+        }
     }
 }

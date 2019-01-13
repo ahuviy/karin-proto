@@ -1,6 +1,16 @@
 <div class="search-wrapper">
-    <div class="icon-wrapper flex-center-center">
-        <i class="fa fa-search"></i>
+    <div class="search-select" (clickOutside)="closeDropdown()">
+        <div class="dropdown-toggle" (click)="toggleDropdown()">
+            <mat-icon>{{isDropdownOpen ? 'arrow_drop_up' : 'arrow_drop_down'}}</mat-icon>
+            <span>{{(dropdownSelection$ | async).label}}</span>
+        </div>
+        <div class="dropdown-menu" *ngIf="isDropdownOpen">
+            <div class="dropdown-option" *ngFor="let opt of dropdownOptions"
+                [class.active]="opt.value === (dropdownSelection$ | async).value"
+                (click)="selectOption(opt)">
+                {{opt.label}}
+            </div>
+        </div>
     </div>
     <input type="text" placeholder="חיפוש" [formControl]="search" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" autoActiveFirstOption>

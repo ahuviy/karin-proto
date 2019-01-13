@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularMaterialModule } from 'app/angular-material.module';
 import { DisappearingScrollDirective } from './directives/disappearingScroll.directive';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { ModalComponent } from './components/modal/modal.component';
 import { WeightUnitPipe } from './pipes/weight-unit.pipe';
 import { IdToItemCategoryPipe } from './pipes/id-to-item-category.pipe';
@@ -19,6 +20,7 @@ import { ItemAutocompleteComponent } from './components/item-autocomplete/item-a
 @NgModule({
     declarations: [
         DisappearingScrollDirective,
+        ClickOutsideDirective,
         ModalComponent,
         WeightUnitPipe,
         IdToItemCategoryPipe,
@@ -46,6 +48,7 @@ import { ItemAutocompleteComponent } from './components/item-autocomplete/item-a
         ReactiveFormsModule,
         AngularMaterialModule,
         DisappearingScrollDirective,
+        ClickOutsideDirective,
         ModalComponent,
         WeightUnitPipe,
         IdToItemCategoryPipe,

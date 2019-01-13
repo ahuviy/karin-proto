@@ -10,3 +10,8 @@ export enum ItemAutocompleteType {
     compositeItem = 'compositeItem',
     distributor = 'distributor',
 }
+
+export interface DropdownOption {
+    value: 'all' | 'baseItems' | 'compositeItems' | 'distributors';
+    label: string;
+}

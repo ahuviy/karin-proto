@@ -35,4 +35,8 @@ export class TopBarComponent {
             height: '600px',
         });
     }
+
+    goToSelected($event) {
+        console.log('go to selected:', $event);
+    }
 }
