@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { BaseItemsService } from 'app/core/base-items.service';
 import { CompositeItemsService } from 'app/core/composite-items.service';
 import { DistributorsService } from 'app/core/distributors.service';
-import { BaseItem, CompositeItem, Distributor } from 'server/server.interface';
+import { ItemAutocompleteOption } from './main-search.interface';
 
 /**
  * This is the main search interface of the app.
@@ -112,9 +112,4 @@ export class MainSearchComponent {
         }
         return `${option.item.name} (${parenthesis})`
     }
-}
-
-export interface ItemAutocompleteOption {
-    type: string;
-    item: BaseItem | CompositeItem | Distributor;
 }
