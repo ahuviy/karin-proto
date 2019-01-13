@@ -1,5 +1,6 @@
-import { Component, Output, EventEmitter, ElementRef } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { map, startWith } from 'rxjs/operators';
 import { combineLatest } from 'rxjs/observable/combineLatest';
 import { Observable } from 'rxjs/Observable';
@@ -9,7 +10,7 @@ import { BaseItemsService } from 'app/core/base-items.service';
 import { CompositeItemsService } from 'app/core/composite-items.service';
 import { DistributorsService } from 'app/core/distributors.service';
 import { ItemAutocompleteOption, ItemAutocompleteType, DropdownOption } from './main-search.interface';
-import { dropdownOptions } from './main-search.utils';
+import { dropdownOptions, pathnameMap } from './main-search.utils';
 
 /**
  * This is the main search interface of the app.
@@ -21,8 +22,6 @@ import { dropdownOptions } from './main-search.utils';
     templateUrl: './main-search.component.html',
 })
 export class MainSearchComponent {
-    @Output() selected = new EventEmitter<ItemAutocompleteOption>();
-
     search = new FormControl('');
     isDropdownOpen = false;
     dropdownSelection$ = new BehaviorSubject<DropdownOption>(dropdownOptions[0]);
@@ -80,6 +79,7 @@ export class MainSearchComponent {
         private compositeItemsService: CompositeItemsService,
         private distributorsService: DistributorsService,
         private el: ElementRef,
+        private router: Router,
     ) { }
 
     ngOnInit() {
@@ -90,8 +90,7 @@ export class MainSearchComponent {
             if (typeof s !== 'string') {
                 setTimeout(() => {
                     this.el.nativeElement.querySelector('input').blur();
-                    this.search.setValue('');
-                    this.selected.emit(s);
+                    this.gotoSelected(s);
                 });
             }
         });
@@ -143,5 +142,11 @@ export class MainSearchComponent {
         } else if (ddSelection.value === 'distributors') {
             return (opt.type === ItemAutocompleteType.distributor);
         }
+    }
+
+    private gotoSelected({ type, item: { id } }: ItemAutocompleteOption) {
+        return this.router.navigate([pathnameMap[type]], {
+            queryParams: { id }
+        });
     }
 }
