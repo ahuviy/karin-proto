@@ -15,7 +15,10 @@ import { SettingsModal } from 'app/settings/settings.modal';
 export class TopBarComponent {
     currentRoute$ = this.router.events.pipe(
         filter(e => e instanceof NavigationEnd),
-        map((e: NavigationEnd) => routeLabels[e.urlAfterRedirects]),
+        map((e: NavigationEnd) => {
+            const pathname = e.urlAfterRedirects.split('?')[0];
+            return routeLabels[pathname];
+        }),
     );
 
     constructor(
