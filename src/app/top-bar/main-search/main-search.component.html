@@ -5,7 +5,7 @@
     <input type="text" placeholder="חיפוש" [formControl]="search" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn" autoActiveFirstOption>
         <mat-option *ngFor="let opt of (filteredOptions$ | async)" [value]="opt">
-            {{opt.item.name}} ({{opt.type === 'baseItem' ? 'חומר גלם' : 'פריט'}})
+            {{getDisplayedOptionString(opt)}}
         </mat-option>
     </mat-autocomplete>
 </div>

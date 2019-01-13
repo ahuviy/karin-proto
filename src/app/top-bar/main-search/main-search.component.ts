@@ -6,12 +6,12 @@ import { Observable } from 'rxjs/Observable';
 
 import { BaseItemsService } from 'app/core/base-items.service';
 import { CompositeItemsService } from 'app/core/composite-items.service';
-import { BaseItem, CompositeItem } from 'server/server.interface';
+import { DistributorsService } from 'app/core/distributors.service';
+import { BaseItem, CompositeItem, Distributor } from 'server/server.interface';
 
 /**
  * This is the main search interface of the app.
  * It can search all data with autocomplete features.
- * TODO: add implementation for distributors search.
  */
 @Component({
     selector: 'kp-main-search',
@@ -34,8 +34,9 @@ export class MainSearchComponent {
     allOptions$: Observable<ItemAutocompleteOption[]> = combineLatest(
         this.baseItemsService.baseItems$,
         this.compositeItemsService.compositeItems$,
+        this.distributorsService.distributors$,
     ).pipe(
-        map(([bis, cis]) => {
+        map(([bis, cis, dists]) => {
             const baseItems = bis ? bis.map(bi => ({
                 type: 'baseItem',
                 item: bi
@@ -44,7 +45,11 @@ export class MainSearchComponent {
                 type: 'compositeItem',
                 item: ci
             })) : [] as ItemAutocompleteOption[];
-            return baseItems.concat(compositeItems);
+            const distributors = dists ? dists.map(d => ({
+                type: 'distributor',
+                item: d,
+            })) : [] as ItemAutocompleteOption[];
+            return [...baseItems, ...compositeItems, ...distributors];
         }),
     );
 
@@ -66,12 +71,14 @@ export class MainSearchComponent {
     constructor(
         private baseItemsService: BaseItemsService,
         private compositeItemsService: CompositeItemsService,
+        private distributorsService: DistributorsService,
         private el: ElementRef,
     ) { }
 
     ngOnInit() {
         this.baseItemsService.refresh();
         this.compositeItemsService.refresh();
+        this.distributorsService.refresh();
         this.search.valueChanges.subscribe(s => {
             if (typeof s !== 'string') {
                 setTimeout(() => {
@@ -87,9 +94,27 @@ export class MainSearchComponent {
         if (typeof option === 'string') return option;
         else return option.item.name;
     }
+
+    getDisplayedOptionString(option: ItemAutocompleteOption) {
+        let parenthesis: string;
+        switch (option.type) {
+            case 'baseItem':
+                parenthesis = 'חומר גלם';
+                break;
+            case 'compositeItem':
+                parenthesis = 'פריט';
+                break;
+            case 'distributor':
+                parenthesis = 'ספק';
+                break;
+            default:
+                throw new Error('could not recognize ItemAutocompleteOption type');
+        }
+        return `${option.item.name} (${parenthesis})`
+    }
 }
 
 export interface ItemAutocompleteOption {
     type: string;
-    item: BaseItem | CompositeItem;
+    item: BaseItem | CompositeItem | Distributor;
 }
