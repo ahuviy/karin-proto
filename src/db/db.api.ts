@@ -13,7 +13,7 @@ if (currentId === DEFAULT_STARTING_ID) {
 }
 
 export function getId(): string {
-    let newId = currentId++;
+    const newId = currentId++;
     return newId.toString();
 }
 
@@ -31,7 +31,7 @@ export function getDb(): Db {
 }
 
 export function saveDb() {
-    if (!cachedDb) throw 'cannot save a non-existent db';
+    if (!cachedDb) throw new Error('cannot save a non-existent db');
     storage.set(DB_KEY, cachedDb);
 }
 
@@ -109,11 +109,11 @@ function getInitialDb(): Db {
 
 function getLastId(db) {
     if (!db) return 1;
-    return db.users.reduce((acc, u) => {
+    return db.users.reduce((accumulator, u) => {
         const maxBaseItemsId = u.baseItems.reduce((acc, bi) => Math.max(acc, +bi.id), 0);
         const maxCompositeItemsId = u.compositeItems.reduce((acc, ci) => Math.max(acc, +ci.id), 0);
         const maxDistributorsId = u.distributors.reduce((acc, dist) => Math.max(acc, +dist.id), 0);
         const maxCategoriesId = u.itemCategories.reduce((acc, cat) => Math.max(acc, +cat.id), 0);
-        return Math.max(+u.id, maxBaseItemsId, maxCategoriesId, maxCompositeItemsId, maxDistributorsId);
+        return Math.max(accumulator, +u.id, maxBaseItemsId, maxCategoriesId, maxCompositeItemsId, maxDistributorsId);
     }, 0);
 }
