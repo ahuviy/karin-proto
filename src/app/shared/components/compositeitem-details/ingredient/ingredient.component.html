@@ -1,11 +1,17 @@
 <div class="ing-description" [formGroup]="ingCtrl">
     <ng-container *ngIf="editMode">
-        <input #amountInput class="amount-input" type="number" *ngIf="editMode"
-            formControlName="amount">
+        <input #amountInput class="amount-input" type="number" formControlName="amount">
         <span>יח׳ -</span>
         <mat-form-field>
-            <mat-select placeholder="מרכיב" formControlName="baseItemId">
+            <mat-select placeholder="חומר גלם" formControlName="baseItemId">
                 <mat-option *ngFor="let opt of baseItemOptions$ | async" [value]="opt.id">
+                    {{opt.text}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="פריט" formControlName="compositeItemId">
+                <mat-option *ngFor="let opt of compositeItemOptions$ | async" [value]="opt.id">
                     {{opt.text}}
                 </mat-option>
             </mat-select>
@@ -14,7 +20,7 @@
     <ng-container *ngIf="!editMode">
         <span>{{amount}}</span>
         <span>יח׳ -</span>
-        <span>{{baseItemDescription}}</span>
+        <span>{{itemDescription}}</span>
     </ng-container>
 </div>
 <div class="actions">

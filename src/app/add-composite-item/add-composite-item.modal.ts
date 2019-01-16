@@ -10,7 +10,6 @@ import { CompositeItemsService } from 'app/core/composite-items.service';
 import { SettingsService } from 'app/core/settings.service';
 import { DistributorsService } from 'app/core/distributors.service';
 import { ItemCategoriesService } from 'app/core/item-categories.service';
-import { BaseItem, CompositeItem } from 'server/server.interface';
 import { weightUnitMap } from 'constants/weight.consts';
 import { ItemAutocompleteOption } from 'app/shared/components/item-autocomplete/item-autocomplete.component';
 

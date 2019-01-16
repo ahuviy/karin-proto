@@ -22,6 +22,7 @@ export class CompositeItemDetailsComponent {
             itemCategoryId: val.itemCategoryId,
             ingredients: this.fb.array(val.ingredients.map(i => this.fb.group({
                 baseItemId: i.baseItemId,
+                compositeItemId: i.compositeItemId,
                 amount: i.amount,
                 editMode: false,
             })))
@@ -85,9 +86,15 @@ export class CompositeItemDetailsComponent {
     addIngredient() {
         const ingredients = this.form.get('ingredients') as FormArray;
         ingredients.push(this.fb.group({
-            baseItemId: [null, Validators.required],
+            baseItemId: null,
+            compositeItemId: null,
             amount: [null, Validators.required],
             editMode: true,
-        }));
+        }, { validator: requiredBaseItemOrCompositeItemId }));
     }
+}
+
+function requiredBaseItemOrCompositeItemId(group: FormGroup) {
+    const { baseItemId, compositeItemId } = group.value;
+    return (baseItemId || compositeItemId) ? null : { requiredId: true };
 }

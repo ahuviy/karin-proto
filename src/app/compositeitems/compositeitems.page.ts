@@ -17,7 +17,6 @@ export class CompositeItemsPage {
 
     subs = [];
 
-    // TODO: edit item - add compositeItems as ingredients (currently only baseItems)
     compositeItems$ = combineLatest(
         this.compositeItemsService.compositeItems$,
         this.route.queryParams,

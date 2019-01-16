@@ -2,8 +2,15 @@ import * as storage from './local-storage.functions';
 import { Db, User, BaseItem, CompositeItem, ItemCategory, Distributor, Settings } from './db.model';
 import { DB_KEY } from './db.consts';
 
+const DEFAULT_STARTING_ID = 1;
 let cachedDb: Db;
-let currentId = 1;  // ids will be assigned in ascending numerical order starting from 1.
+let currentId = DEFAULT_STARTING_ID;  // ids will be assigned in ascending numerical order starting from 1.
+
+getDb(); // initialize the db (or restore a previous version)
+if (currentId === DEFAULT_STARTING_ID) {
+    // We didn't initialize the db. We need to set currentId to the last id in the cached Db.
+    currentId = getLastId(cachedDb) + 1;
+}
 
 export function getId(): string {
     let newId = currentId++;
@@ -98,4 +105,15 @@ function getInitialDb(): Db {
             { id: getId(), name: 'עוגות' },
         ];
     }
+}
+
+function getLastId(db) {
+    if (!db) return 1;
+    return db.users.reduce((acc, u) => {
+        const maxBaseItemsId = u.baseItems.reduce((acc, bi) => Math.max(acc, +bi.id), 0);
+        const maxCompositeItemsId = u.compositeItems.reduce((acc, ci) => Math.max(acc, +ci.id), 0);
+        const maxDistributorsId = u.distributors.reduce((acc, dist) => Math.max(acc, +dist.id), 0);
+        const maxCategoriesId = u.itemCategories.reduce((acc, cat) => Math.max(acc, +cat.id), 0);
+        return Math.max(+u.id, maxBaseItemsId, maxCategoriesId, maxCompositeItemsId, maxDistributorsId);
+    }, 0);
 }

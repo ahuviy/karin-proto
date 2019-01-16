@@ -3,7 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { map } from 'rxjs/operators';
 
 import { BaseItemsService } from 'app/core/base-items.service';
-import { BaseItem } from 'server/server.interface';
+import { CompositeItemsService } from 'app/core/composite-items.service';
+import { CompositeItem } from 'server/server.interface';
 import { weightUnitMap } from 'constants/weight.consts';
 
 @Component({
@@ -28,7 +29,27 @@ export class IngredientComponent {
         })),
     );
 
-    constructor(private baseItemsService: BaseItemsService) { }
+    compositeItemOptions$ = this.compositeItemsService.compositeItems$.pipe(
+        map(cis => cis
+            .filter(ci => {
+                const { id: currentItemId, ingredients } = this.ingCtrl.parent.parent.value;
+                const containsCurrentItem = this.containsCurrentItem(ci, currentItemId);
+                if (containsCurrentItem) return false;
+                const isOneOfTheIngredients = ingredients.some(ing => ci.id === ing.compositeItemId);
+                if (isOneOfTheIngredients) return false;
+                return true;
+            })
+            .map(ci => ({
+                id: ci.id,
+                text: ci.name,
+            }))
+        ),
+    );
+
+    constructor(
+        private baseItemsService: BaseItemsService,
+        private compositeItemsService: CompositeItemsService,
+    ) { }
 
     get amount() {
         return this.ingCtrl.value.amount;
@@ -38,12 +59,15 @@ export class IngredientComponent {
         return this.ingCtrl.value.editMode;
     }
 
-    get baseItemDescription() {
+    get itemDescription() {
         if (this.ingCtrl.value.baseItemId) {
             const baseItem = this.baseItemsService.baseItems.find(bi => bi.id === this.ingCtrl.value.baseItemId);
             return baseItem.priceBy === 'weight'
                 ? `${baseItem.name} (${baseItem.weight} ${weightUnitMap[baseItem.weightUnit]})`
                 : baseItem.name;
+        } else if (this.ingCtrl.value.compositeItemId) {
+            const compositeItem = this.compositeItemsService.compositeItems.find(ci => ci.id === this.ingCtrl.value.compositeItemId);
+            return compositeItem.name;
         } else {
             return '';
         }
@@ -55,5 +79,15 @@ export class IngredientComponent {
         if (editModeCtrl.value) {
             setTimeout(() => this.amountInput.nativeElement.focus(), 0);
         }
+    }
+
+    private containsCurrentItem(compositeItem: CompositeItem, currentItemId: string): boolean {
+        if (compositeItem.id === currentItemId) return true;
+        return compositeItem.ingredients.some(ing => {
+            if (!ing.baseItemId && !ing.compositeItemId) throw new Error('bad ingredient, contains no id');
+            if (ing.baseItemId) return false;
+            const fullIngredient = this.compositeItemsService.compositeItems.find(ci => ci.id === ing.compositeItemId);
+            return this.containsCurrentItem(fullIngredient, currentItemId);
+        });
     }
 }
