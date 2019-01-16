@@ -126,7 +126,7 @@
     "component-selector": [
       true,
       "element",
-      "app",
+      "kp",
       "kebab-case"
     ],
     "no-output-on-prefix": true,
@@ -135,9 +135,9 @@
     "use-host-property-decorator": true,
     "no-input-rename": true,
     "no-output-rename": true,
-    "use-life-cycle-interface": true,
+    "use-life-cycle-interface": false,
     "use-pipe-transform-interface": true,
-    "component-class-suffix": true,
+    "component-class-suffix": [true, "Component", "Page"],
     "directive-class-suffix": true
   }
 }
